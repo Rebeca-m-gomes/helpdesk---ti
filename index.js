@@ -1,10 +1,14 @@
 const express = require('express');
 const mysql = require('mysql2');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
 
-// conexão com banco (Railway)
+// servir HTML
+app.use(express.static(__dirname));
+
+// banco
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
@@ -13,48 +17,36 @@ const db = mysql.createConnection({
   port: process.env.MYSQLPORT
 });
 
-// conectar
-db.connect((err) => {
-  if (err) {
-    console.error("Erro ao conectar:", err);
-  } else {
-    console.log("Banco conectado 🚀");
-  }
+db.connect(err => {
+  if (err) console.error(err);
+  else console.log("Banco conectado 🚀");
 });
 
 // rota teste
 app.get('/', (req, res) => {
-  res.send('API rodando 🚀');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// criar chamado
+// API
 app.post('/chamados', (req, res) => {
   const { titulo, descricao } = req.body;
 
-  const sql = 'INSERT INTO chamados (titulo, descricao) VALUES (?, ?)';
-  
-  db.query(sql, [titulo, descricao], (err, result) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
+  db.query(
+    'INSERT INTO chamados (titulo, descricao) VALUES (?, ?)',
+    [titulo, descricao],
+    (err) => {
+      if (err) return res.status(500).send(err);
       res.send("Chamado criado ✅");
     }
-  });
+  );
 });
 
-// listar chamados
 app.get('/chamados', (req, res) => {
-  db.query('SELECT * FROM chamados', (err, results) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(results);
-    }
+  db.query('SELECT * FROM chamados', (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json(result);
   });
 });
 
-// porta Railway
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("Servidor rodando 🚀");
-});
+app.listen(PORT, () => console.log("Servidor rodando 🚀"));
