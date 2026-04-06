@@ -408,7 +408,8 @@
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 15px 20px;
             background: rgba(255, 255, 255, 0.05);
@@ -421,7 +422,8 @@
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #0096FF;
             box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
@@ -485,7 +487,7 @@
             color: #0096FF;
         }
 
-        /* ========== TELA DE CADASTRO (APENAS TI) ========== */
+        /* ========== TELA DE CADASTRO ========== */
         .register-screen {
             display: none;
             justify-content: center;
@@ -672,7 +674,7 @@
             display: none;
         }
 
-        /* ========== TELA PRINCIPAL (mantida igual) ========== */
+        /* ========== TELA PRINCIPAL ========== */
         .main-screen {
             display: none;
             min-height: 100vh;
@@ -695,6 +697,7 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 5px 30px rgba(0, 150, 255, 0.2);
+            flex-wrap: wrap;
         }
 
         .nav-brand {
@@ -722,6 +725,7 @@
             display: flex;
             align-items: center;
             gap: 30px;
+            flex-wrap: wrap;
         }
 
         .user-profile {
@@ -762,16 +766,6 @@
             font-size: 0.85em;
             color: #8A8AD9;
             letter-spacing: 1px;
-        }
-
-        .role-badge {
-            background: #00FFC8;
-            color: #0A0A1A;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.7em;
-            font-weight: 600;
-            margin-left: 5px;
         }
 
         .btn-logout {
@@ -1024,7 +1018,6 @@
         .priority-media { background: #FFAA00; color: #0A0A1A; }
         .priority-baixa { background: #00FFC8; color: #0A0A1A; }
 
-        /* ========== Ações com Status ========== */
         .acoes-container {
             display: flex;
             gap: 8px;
@@ -1215,23 +1208,6 @@
             margin-bottom: 25px;
         }
 
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #2A2A4A;
-            border-radius: 12px;
-            font-size: 0.95em;
-            color: #E0E0FF;
-            font-family: 'Space Grotesk', sans-serif;
-            resize: vertical;
-        }
-
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #0096FF;
-        }
-
         .modal {
             display: none;
             position: fixed;
@@ -1358,6 +1334,7 @@
                 flex-direction: column;
                 height: auto;
                 padding: 15px;
+                gap: 15px;
             }
             .nav-user {
                 width: 100%;
@@ -1374,14 +1351,12 @@
     <!-- Fundo Tecnológico Futurista -->
     <div class="tech-background">
         <div class="grid-3d"></div>
-        
         <div class="circuit-lines">
             <div class="circuit-line"></div>
             <div class="circuit-line"></div>
             <div class="circuit-line"></div>
             <div class="circuit-line"></div>
         </div>
-
         <div class="particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -1394,13 +1369,10 @@
             <div class="particle"></div>
             <div class="particle"></div>
         </div>
-
         <div class="scan-effect"></div>
-
         <div class="sphere sphere1"></div>
         <div class="sphere sphere2"></div>
         <div class="sphere sphere3"></div>
-
         <div class="data-stream"></div>
     </div>
 
@@ -1414,13 +1386,13 @@
             </div>
             
             <div class="login-tabs">
-                <div class="login-tab usuario active" onclick="selecionarTipoLogin('usuario')">
+                <div class="login-tab usuario active" data-tipo="usuario">
                     👤 COLABORADOR
                 </div>
-                <div class="login-tab tecnico" onclick="selecionarTipoLogin('tecnico')">
+                <div class="login-tab tecnico" data-tipo="tecnico">
                     🔧 TÉCNICO
                 </div>
-                <div class="login-tab gestor" onclick="selecionarTipoLogin('gestor')">
+                <div class="login-tab gestor" data-tipo="gestor">
                     👩‍💻 GESTOR
                 </div>
             </div>
@@ -1445,7 +1417,7 @@
         </div>
     </div>
 
-    <!-- TELA DE CADASTRO (APENAS TI) -->
+    <!-- TELA DE CADASTRO -->
     <div id="registerScreen" class="register-screen">
         <div class="register-card">
             <div class="register-header">
@@ -1510,14 +1482,12 @@
             <div class="form-group">
                 <label>SENHA DA CONTA</label>
                 <input type="password" id="registerSenha" placeholder="Crie sua senha" onkeyup="verificarForcaSenha()">
-                
                 <div class="password-strength">
                     <div class="strength-bar">
                         <div id="strengthBar" class="strength-bar-fill"></div>
                     </div>
                     <div id="strengthText" class="strength-text">FORÇA DA SENHA</div>
                 </div>
-
                 <div class="requirements">
                     <div id="reqLength" class="requirement">❌ Mínimo 6 caracteres</div>
                     <div id="reqNumber" class="requirement">❌ Pelo menos 1 número</div>
@@ -1541,15 +1511,13 @@
         </div>
     </div>
 
-    <!-- TELA PRINCIPAL (mantida igual) -->
+    <!-- TELA PRINCIPAL -->
     <div id="mainScreen" class="main-screen">
-        <!-- Top Navigation -->
         <div class="top-nav">
             <div class="nav-brand">
                 <span class="brand-icon">🖥️</span>
                 <h2>SISTEMA DE CHAMADO</h2>
             </div>
-            
             <div class="nav-user">
                 <div class="user-profile">
                     <div class="user-avatar" id="userAvatar">👤</div>
@@ -1562,12 +1530,10 @@
             </div>
         </div>
 
-        <!-- Main Container -->
         <div class="main-container">
-            <!-- Menu de Navegação -->
             <div class="nav-menu" id="navMenu"></div>
 
-            <!-- TELA DASHBOARD (apenas para gestores) -->
+            <!-- DASHBOARD -->
             <div id="dashboardScreen" class="dashboard-screen">
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -1606,7 +1572,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="charts-grid">
                     <div class="chart-card">
                         <h3>📊 STATUS DOS CHAMADOS</h3>
@@ -1623,7 +1588,7 @@
                 </div>
             </div>
 
-            <!-- TELA DE CHAMADOS (para técnicos e gestores) -->
+            <!-- CHAMADOS -->
             <div id="chamadosScreen" class="chamados-screen">
                 <div class="filter-bar">
                     <div class="filter-group">
@@ -1656,39 +1621,25 @@
                         <input type="text" id="pesquisaChamados" placeholder="🔍 BUSCAR..." onkeyup="filtrarChamados()">
                     </div>
                 </div>
-
                 <div class="table-container">
                     <table>
                         <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>DATA</th>
-                                <th>TÍTULO</th>
-                                <th>SETOR</th>
-                                <th>SOLICITANTE</th>
-                                <th>PRIORIDADE</th>
-                                <th>AÇÕES</th>
-                            </tr>
+                            <tr><th>ID</th><th>DATA</th><th>TÍTULO</th><th>SETOR</th><th>SOLICITANTE</th><th>PRIORIDADE</th><th>AÇÕES</th></tr>
                         </thead>
                         <tbody id="tabelaChamados"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- TELA NOVO CHAMADO (para todos) -->
+            <!-- NOVO CHAMADO -->
             <div id="novoChamadoScreen" class="chamados-screen">
                 <div class="ticket-form">
-                    <h2>
-                        <span>🚨</span>
-                        ABRIR NOVO CHAMADO
-                    </h2>
-
+                    <h2><span>🚨</span> ABRIR NOVO CHAMADO</h2>
                     <div class="form-row">
                         <div class="form-group">
                             <label>TÍTULO DO CHAMADO</label>
                             <input type="text" id="tituloChamado" placeholder="Ex: Computador não liga">
                         </div>
-                        
                         <div class="form-group">
                             <label>CATEGORIA</label>
                             <select id="categoriaChamado">
@@ -1701,7 +1652,6 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="form-row">
                         <div class="form-group">
                             <label>PRIORIDADE</label>
@@ -1711,45 +1661,28 @@
                                 <option value="alta">🔴 ALTA</option>
                             </select>
                         </div>
-                        
                         <div class="form-group">
                             <label>SETOR</label>
                             <input type="text" id="setorChamado" readonly>
                         </div>
                     </div>
-
                     <div class="form-row">
                         <div class="form-group">
                             <label>DESCRIÇÃO DO PROBLEMA</label>
                             <textarea id="descricaoChamado" rows="5" placeholder="Descreva detalhadamente o problema..."></textarea>
                         </div>
                     </div>
-                    
-                    <button class="btn-login" onclick="abrirChamado()" style="width: auto;">
-                        <span>📨</span> ABRIR CHAMADO
-                    </button>
+                    <button class="btn-login" onclick="abrirChamado()" style="width: auto;"><span>📨</span> ABRIR CHAMADO</button>
                 </div>
             </div>
 
-            <!-- TELA MEUS CHAMADOS (para colaboradores) -->
+            <!-- MEUS CHAMADOS -->
             <div id="meusChamadosScreen" class="chamados-screen">
                 <div class="ticket-form">
-                    <h2>
-                        <span>👤</span>
-                        MEUS CHAMADOS
-                    </h2>
-
+                    <h2><span>👤</span> MEUS CHAMADOS</h2>
                     <div class="table-container">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>DATA</th>
-                                    <th>TÍTULO</th>
-                                    <th>PRIORIDADE</th>
-                                    <th>AÇÕES</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>ID</th><th>DATA</th><th>TÍTULO</th><th>PRIORIDADE</th><th>AÇÕES</th></tr></thead>
                             <tbody id="tabelaMeusChamados"></tbody>
                         </table>
                     </div>
@@ -1761,20 +1694,14 @@
     <!-- MODAIS -->
     <div id="modalDetalhes" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3><span>🔍</span> DETALHES DO CHAMADO</h3>
-                <button class="close-modal" onclick="fecharModal('modalDetalhes')">&times;</button>
-            </div>
+            <div class="modal-header"><h3><span>🔍</span> DETALHES DO CHAMADO</h3><button class="close-modal" onclick="fecharModal('modalDetalhes')">&times;</button></div>
             <div class="modal-body" id="detalhesChamado"></div>
         </div>
     </div>
 
     <div id="modalFechar" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3><span>🔒</span> FECHAR CHAMADO</h3>
-                <button class="close-modal" onclick="fecharModal('modalFechar')">&times;</button>
-            </div>
+            <div class="modal-header"><h3><span>🔒</span> FECHAR CHAMADO</h3><button class="close-modal" onclick="fecharModal('modalFechar')">&times;</button></div>
             <div class="modal-body" id="formFechar"></div>
         </div>
     </div>
@@ -1785,139 +1712,11 @@
         let chamados = [];
         let usuarioAtual = null;
         let tipoLoginSelecionado = 'usuario';
-        let statusChart, priorityChart;
-        let menuAberto = null;
+        let statusChart = null;
+        let priorityChart = null;
 
-        // Senha especial do setor de TI
         const SENHA_TI = 'TI@2024';
-
-        // Lista de técnicos disponíveis
-        const tecnicosDisponiveis = [
-            'João Silva',
-            'Maria Santos',
-            'Pedro Costa',
-            'Ana Oliveira',
-            'Carlos Souza'
-        ];
-
-        // Carregar dados salvos
-        function carregarDados() {
-            const usuariosSalvos = localStorage.getItem('mission_usuarios');
-            if (usuariosSalvos) {
-                usuarios = JSON.parse(usuariosSalvos);
-            } else {
-                // Criar usuários padrão
-                usuarios.push({
-                    id: 1,
-                    nome: 'Gestor TI',
-                    email: 'gestor@ti.com',
-                    setor: 'ti',
-                    cargo: 'gestor',
-                    senha: hashSenha('Gestor@123'),
-                    tipo: 'gestor',
-                    dataCadastro: new Date().toISOString()
-                });
-                
-                usuarios.push({
-                    id: 2,
-                    nome: 'João Técnico',
-                    email: 'joao.tecnico@ti.com',
-                    setor: 'ti',
-                    cargo: 'tecnico',
-                    senha: hashSenha('Tecnico@123'),
-                    tipo: 'tecnico',
-                    dataCadastro: new Date().toISOString()
-                });
-                
-                usuarios.push({
-                    id: 3,
-                    nome: 'Maria Colaboradora',
-                    email: 'maria@rh.com',
-                    setor: 'rh',
-                    cargo: 'colaborador',
-                    senha: hashSenha('Colab@123'),
-                    tipo: 'usuario',
-                    dataCadastro: new Date().toISOString()
-                });
-                salvarUsuarios();
-            }
-            
-            const chamadosSalvos = localStorage.getItem('mission_chamados');
-            if (chamadosSalvos) {
-                chamados = JSON.parse(chamadosSalvos);
-            } else {
-                // Dados de exemplo
-                chamados = [
-                    {
-                        id: 'M2024001',
-                        data: '2024-01-20 09:30',
-                        titulo: 'Computador não liga',
-                        categoria: 'hardware',
-                        prioridade: 'alta',
-                        status: 'resolvido',
-                        setor: 'financeiro',
-                        solicitante: 'João Silva',
-                        email: 'joao@empresa.com',
-                        tecnico: 'Maria Santos',
-                        motivo: 'Problema resolvido',
-                        observacao: 'Fonte queimada, substituída com sucesso.',
-                        historico: [
-                            { data: '2024-01-20 09:35', acao: 'Chamado aberto', responsavel: 'João Silva' },
-                            { data: '2024-01-20 10:00', acao: 'Atribuído a Maria Santos', responsavel: 'Sistema' },
-                            { data: '2024-01-20 10:30', acao: 'Em andamento', responsavel: 'Maria Santos' },
-                            { data: '2024-01-20 11:00', acao: 'Resolvido', responsavel: 'Maria Santos' },
-                            { data: '2024-01-20 11:30', acao: 'Fechado', responsavel: 'Maria Santos' }
-                        ]
-                    },
-                    {
-                        id: 'M2024002',
-                        data: '2024-01-20 10:15',
-                        titulo: 'Acesso lento à internet',
-                        categoria: 'rede',
-                        prioridade: 'media',
-                        status: 'aberto',
-                        setor: 'comercial',
-                        solicitante: 'Maria Oliveira',
-                        email: 'maria@empresa.com',
-                        tecnico: 'João Silva',
-                        motivo: '',
-                        observacao: '',
-                        historico: [
-                            { data: '2024-01-20 10:20', acao: 'Chamado aberto', responsavel: 'Maria Oliveira' },
-                            { data: '2024-01-20 10:45', acao: 'Atribuído a João Silva', responsavel: 'Sistema' }
-                        ]
-                    },
-                    {
-                        id: 'M2024003',
-                        data: '2024-01-20 11:00',
-                        titulo: 'Impressora não funciona',
-                        categoria: 'hardware',
-                        prioridade: 'baixa',
-                        status: 'andamento',
-                        setor: 'rh',
-                        solicitante: 'Ana Paula',
-                        email: 'ana@rh.com',
-                        tecnico: 'Pedro Costa',
-                        motivo: '',
-                        observacao: '',
-                        historico: [
-                            { data: '2024-01-20 11:05', acao: 'Chamado aberto', responsavel: 'Ana Paula' },
-                            { data: '2024-01-20 11:30', acao: 'Atribuído a Pedro Costa', responsavel: 'Sistema' },
-                            { data: '2024-01-20 14:00', acao: 'Em andamento', responsavel: 'Pedro Costa' }
-                        ]
-                    }
-                ];
-                salvarChamados();
-            }
-        }
-
-        function salvarUsuarios() {
-            localStorage.setItem('mission_usuarios', JSON.stringify(usuarios));
-        }
-
-        function salvarChamados() {
-            localStorage.setItem('mission_chamados', JSON.stringify(chamados));
-        }
+        const TECNICOS_DISPONIVEIS = ['João Silva', 'Maria Santos', 'Pedro Costa', 'Ana Oliveira', 'Carlos Souza'];
 
         // Hash simples para senha
         function hashSenha(senha) {
@@ -1929,7 +1728,36 @@
             return hash.toString();
         }
 
-        // ========== FUNÇÕES DE INTERFACE ==========
+        function salvarUsuarios() { localStorage.setItem('mission_usuarios', JSON.stringify(usuarios)); }
+        function salvarChamados() { localStorage.setItem('mission_chamados', JSON.stringify(chamados)); }
+
+        function carregarDados() {
+            const usuariosSalvos = localStorage.getItem('mission_usuarios');
+            if (usuariosSalvos) {
+                usuarios = JSON.parse(usuariosSalvos);
+            } else {
+                usuarios = [
+                    { id: 1, nome: 'Gestor TI', email: 'gestor@ti.com', setor: 'ti', cargo: 'gestor', senha: hashSenha('Gestor@123'), tipo: 'gestor', dataCadastro: new Date().toISOString() },
+                    { id: 2, nome: 'João Técnico', email: 'joao.tecnico@ti.com', setor: 'ti', cargo: 'tecnico', senha: hashSenha('Tecnico@123'), tipo: 'tecnico', dataCadastro: new Date().toISOString() },
+                    { id: 3, nome: 'Maria Colaboradora', email: 'maria@rh.com', setor: 'rh', cargo: 'colaborador', senha: hashSenha('Colab@123'), tipo: 'usuario', dataCadastro: new Date().toISOString() }
+                ];
+                salvarUsuarios();
+            }
+            
+            const chamadosSalvos = localStorage.getItem('mission_chamados');
+            if (chamadosSalvos) {
+                chamados = JSON.parse(chamadosSalvos);
+            } else {
+                chamados = [
+                    { id: 'M2024001', data: '2024-01-20 09:30', titulo: 'Computador não liga', categoria: 'hardware', prioridade: 'alta', status: 'resolvido', setor: 'financeiro', solicitante: 'João Silva', email: 'joao@empresa.com', descricao: 'Computador não liga após queda de energia', tecnico: 'Maria Santos', motivo: 'Problema resolvido', observacao: 'Fonte queimada, substituída com sucesso.', historico: [{ data: '2024-01-20 09:35', acao: 'Chamado aberto', responsavel: 'João Silva' }, { data: '2024-01-20 10:00', acao: 'Atribuído a Maria Santos', responsavel: 'Sistema' }, { data: '2024-01-20 11:00', acao: 'Resolvido', responsavel: 'Maria Santos' }] },
+                    { id: 'M2024002', data: '2024-01-20 10:15', titulo: 'Acesso lento à internet', categoria: 'rede', prioridade: 'media', status: 'aberto', setor: 'comercial', solicitante: 'Maria Oliveira', email: 'maria@empresa.com', descricao: 'Internet está muito lenta', tecnico: 'João Silva', motivo: '', observacao: '', historico: [{ data: '2024-01-20 10:20', acao: 'Chamado aberto', responsavel: 'Maria Oliveira' }, { data: '2024-01-20 10:45', acao: 'Atribuído a João Silva', responsavel: 'Sistema' }] },
+                    { id: 'M2024003', data: '2024-01-20 11:00', titulo: 'Impressora não funciona', categoria: 'hardware', prioridade: 'baixa', status: 'andamento', setor: 'rh', solicitante: 'Ana Paula', email: 'ana@rh.com', descricao: 'Impressora não imprime', tecnico: 'Pedro Costa', motivo: '', observacao: '', historico: [{ data: '2024-01-20 11:05', acao: 'Chamado aberto', responsavel: 'Ana Paula' }, { data: '2024-01-20 14:00', acao: 'Em andamento', responsavel: 'Pedro Costa' }] }
+                ];
+                salvarChamados();
+            }
+        }
+
+        // ========== INTERFACE ==========
         function mostrarCadastro() {
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('registerScreen').classList.add('active');
@@ -1940,72 +1768,37 @@
             document.getElementById('loginScreen').style.display = 'flex';
         }
 
-        function selecionarTipoLogin(tipo) {
-            tipoLoginSelecionado = tipo;
-            document.querySelectorAll('.login-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-        }
+        // Configurar tabs de login
+        document.querySelectorAll('.login-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                tipoLoginSelecionado = this.getAttribute('data-tipo');
+            });
+        });
 
-        function mostrarErro(elementId, mensagem) {
-            const errorDiv = document.getElementById(elementId);
-            errorDiv.textContent = mensagem;
-            errorDiv.style.display = 'block';
-            setTimeout(() => {
-                errorDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        function mostrarSucesso(elementId, mensagem) {
-            const successDiv = document.getElementById(elementId);
-            successDiv.textContent = mensagem;
-            successDiv.style.display = 'block';
-            setTimeout(() => {
-                successDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        // ========== VALIDAÇÃO DE SENHA ==========
         function verificarForcaSenha() {
             const senha = document.getElementById('registerSenha').value;
+            const reqLength = senha.length >= 6;
+            const reqNumber = /\d/.test(senha);
+            const reqUpper = /[A-Z]/.test(senha);
             
-            const requirements = {
-                length: senha.length >= 6,
-                number: /\d/.test(senha),
-                upper: /[A-Z]/.test(senha)
-            };
+            document.getElementById('reqLength').innerHTML = (reqLength ? '✅' : '❌') + ' Mínimo 6 caracteres';
+            document.getElementById('reqLength').className = reqLength ? 'requirement met' : 'requirement';
+            document.getElementById('reqNumber').innerHTML = (reqNumber ? '✅' : '❌') + ' Pelo menos 1 número';
+            document.getElementById('reqNumber').className = reqNumber ? 'requirement met' : 'requirement';
+            document.getElementById('reqUpper').innerHTML = (reqUpper ? '✅' : '❌') + ' Pelo menos 1 letra maiúscula';
+            document.getElementById('reqUpper').className = reqUpper ? 'requirement met' : 'requirement';
 
-            document.getElementById('reqLength').innerHTML = (requirements.length ? '✅' : '❌') + ' Mínimo 6 caracteres';
-            document.getElementById('reqLength').className = requirements.length ? 'requirement met' : 'requirement';
-            
-            document.getElementById('reqNumber').innerHTML = (requirements.number ? '✅' : '❌') + ' Pelo menos 1 número';
-            document.getElementById('reqNumber').className = requirements.number ? 'requirement met' : 'requirement';
-            
-            document.getElementById('reqUpper').innerHTML = (requirements.upper ? '✅' : '❌') + ' Pelo menos 1 letra maiúscula';
-            document.getElementById('reqUpper').className = requirements.upper ? 'requirement met' : 'requirement';
-
-            const metCount = Object.values(requirements).filter(Boolean).length;
+            const metCount = [reqLength, reqNumber, reqUpper].filter(Boolean).length;
             const percent = (metCount / 3) * 100;
-            
             const bar = document.getElementById('strengthBar');
             const text = document.getElementById('strengthText');
 
-            if (percent <= 33) {
-                bar.style.width = '33%';
-                bar.style.background = '#FF3366';
-                text.textContent = 'FORÇA: FRACA';
-                text.style.color = '#FF99AA';
-            } else if (percent <= 66) {
-                bar.style.width = '66%';
-                bar.style.background = '#FFAA00';
-                text.textContent = 'FORÇA: MÉDIA';
-                text.style.color = '#FFAA00';
-            } else {
-                bar.style.width = '100%';
-                bar.style.background = '#00FFC8';
-                text.textContent = 'FORÇA: FORTE';
-                text.style.color = '#00FFC8';
-            }
-
+            if (percent <= 33) { bar.style.width = '33%'; bar.style.background = '#FF3366'; text.textContent = 'FORÇA: FRACA'; text.style.color = '#FF99AA'; }
+            else if (percent <= 66) { bar.style.width = '66%'; bar.style.background = '#FFAA00'; text.textContent = 'FORÇA: MÉDIA'; text.style.color = '#FFAA00'; }
+            else { bar.style.width = '100%'; bar.style.background = '#00FFC8'; text.textContent = 'FORÇA: FORTE'; text.style.color = '#00FFC8'; }
+            
             verificarConfirmacaoSenha();
         }
 
@@ -2013,25 +1806,14 @@
             const senha = document.getElementById('registerSenha').value;
             const confirmar = document.getElementById('registerConfirmarSenha').value;
             const matchDiv = document.getElementById('senhaMatch');
-
             if (confirmar.length > 0) {
-                if (senha === confirmar) {
-                    matchDiv.innerHTML = '✅ SENHAS CONFEREM';
-                    matchDiv.style.color = '#00FFC8';
-                } else {
-                    matchDiv.innerHTML = '❌ SENHAS NÃO CONFEREM';
-                    matchDiv.style.color = '#FF3366';
-                }
-            } else {
-                matchDiv.innerHTML = '';
-            }
+                matchDiv.innerHTML = senha === confirmar ? '✅ SENHAS CONFEREM' : '❌ SENHAS NÃO CONFEREM';
+                matchDiv.style.color = senha === confirmar ? '#00FFC8' : '#FF3366';
+            } else { matchDiv.innerHTML = ''; }
         }
 
-        function senhaValida(senha) {
-            return senha.length >= 6 && /\d/.test(senha) && /[A-Z]/.test(senha);
-        }
+        function senhaValida(senha) { return senha.length >= 6 && /\d/.test(senha) && /[A-Z]/.test(senha); }
 
-        // ========== CADASTRO (APENAS COM SENHA TI) ==========
         function cadastrarUsuario() {
             const nome = document.getElementById('registerNome').value.trim();
             const email = document.getElementById('registerEmail').value.trim();
@@ -2043,125 +1825,69 @@
             const confirmarSenha = document.getElementById('registerConfirmarSenha').value;
 
             if (!nome || !email || !senhaTI || !senha || !confirmarSenha) {
-                mostrarErro('registerError', 'Preencha todos os campos obrigatórios.');
-                return;
+                mostrarErro('registerError', 'Preencha todos os campos obrigatórios.'); return;
             }
-
-            // Verificar senha especial do TI
-            if (senhaTI !== SENHA_TI) {
-                mostrarErro('registerError', 'Senha do setor de TI incorreta!');
-                return;
-            }
-
-            if (!email.includes('@') || !email.includes('.')) {
-                mostrarErro('registerError', 'Email inválido.');
-                return;
-            }
-
-            if (senha !== confirmarSenha) {
-                mostrarErro('registerError', 'As senhas não conferem.');
-                return;
-            }
-
-            if (!senhaValida(senha)) {
-                mostrarErro('registerError', 'A senha deve ter 6 caracteres, 1 número e 1 maiúscula.');
-                return;
-            }
+            if (senhaTI !== SENHA_TI) { mostrarErro('registerError', 'Senha do setor de TI incorreta!'); return; }
+            if (!email.includes('@') || !email.includes('.')) { mostrarErro('registerError', 'Email inválido.'); return; }
+            if (senha !== confirmarSenha) { mostrarErro('registerError', 'As senhas não conferem.'); return; }
+            if (!senhaValida(senha)) { mostrarErro('registerError', 'A senha deve ter 6 caracteres, 1 número e 1 maiúscula.'); return; }
 
             carregarDados();
+            if (usuarios.some(u => u.email === email)) { mostrarErro('registerError', 'Este email já está cadastrado.'); return; }
 
-            if (usuarios.some(u => u.email === email)) {
-                mostrarErro('registerError', 'Este email já está cadastrado.');
-                return;
-            }
-
-            // Determinar tipo de usuário baseado no cargo
             let tipo = 'usuario';
-            if (cargo === 'tecnico') {
-                tipo = 'tecnico';
-            } else if (cargo === 'gestor' || cargo === 'coordenador' || cargo === 'gerente') {
-                tipo = 'gestor';
-            }
+            if (cargo === 'tecnico') tipo = 'tecnico';
+            else if (cargo === 'gestor' || cargo === 'coordenador' || cargo === 'gerente') tipo = 'gestor';
 
-            const novoUsuario = {
-                id: usuarios.length + 1,
-                nome: nome,
-                email: email,
-                setor: setor,
-                cargo: cargo,
-                celular: celular,
-                senha: hashSenha(senha),
-                tipo: tipo,
-                dataCadastro: new Date().toISOString()
-            };
-
+            const novoUsuario = { id: usuarios.length + 1, nome, email, setor, cargo, celular, senha: hashSenha(senha), tipo, dataCadastro: new Date().toISOString() };
             usuarios.push(novoUsuario);
             salvarUsuarios();
 
             mostrarSucesso('registerSuccess', 'Conta criada com sucesso! Faça o login.');
-            
             document.getElementById('registerNome').value = '';
             document.getElementById('registerEmail').value = '';
             document.getElementById('senhaTI').value = '';
             document.getElementById('registerSenha').value = '';
             document.getElementById('registerConfirmarSenha').value = '';
             document.getElementById('registerCelular').value = '';
-
-            setTimeout(() => {
-                mostrarLogin();
-            }, 2000);
+            setTimeout(() => mostrarLogin(), 2000);
         }
 
-        // ========== LOGIN ==========
+        function mostrarErro(elementId, mensagem) {
+            const errorDiv = document.getElementById(elementId);
+            errorDiv.textContent = mensagem;
+            errorDiv.style.display = 'block';
+            setTimeout(() => errorDiv.style.display = 'none', 5000);
+        }
+
+        function mostrarSucesso(elementId, mensagem) {
+            const successDiv = document.getElementById(elementId);
+            successDiv.textContent = mensagem;
+            successDiv.style.display = 'block';
+            setTimeout(() => successDiv.style.display = 'none', 5000);
+        }
+
         function fazerLogin() {
             const email = document.getElementById('loginEmail').value.trim();
             const senha = document.getElementById('loginSenha').value;
-
             carregarDados();
-
             const usuario = usuarios.find(u => u.email === email && u.senha === hashSenha(senha));
 
             if (usuario) {
-                // Verificar permissões baseado na aba selecionada
-                if (tipoLoginSelecionado === 'gestor' && usuario.tipo !== 'gestor') {
-                    alert('Esta conta não tem permissão de gestor. Use a aba adequada.');
-                    return;
-                }
-                if (tipoLoginSelecionado === 'tecnico' && usuario.tipo !== 'tecnico') {
-                    alert('Esta conta não tem permissão de técnico. Use a aba adequada.');
-                    return;
-                }
-                if (tipoLoginSelecionado === 'usuario' && usuario.tipo !== 'usuario') {
-                    alert('Esta conta não é de colaborador. Use a aba adequada.');
-                    return;
-                }
+                if (tipoLoginSelecionado === 'gestor' && usuario.tipo !== 'gestor') { alert('Esta conta não tem permissão de gestor.'); return; }
+                if (tipoLoginSelecionado === 'tecnico' && usuario.tipo !== 'tecnico') { alert('Esta conta não tem permissão de técnico.'); return; }
+                if (tipoLoginSelecionado === 'usuario' && usuario.tipo !== 'usuario') { alert('Esta conta não é de colaborador.'); return; }
 
                 usuarioAtual = usuario;
-                
                 document.getElementById('userName').textContent = usuario.nome;
-                
-                let roleText = '';
-                if (usuario.tipo === 'gestor') {
-                    roleText = '👩‍💻 GESTOR';
-                } else if (usuario.tipo === 'tecnico') {
-                    roleText = '🔧 TÉCNICO';
-                } else {
-                    roleText = usuario.setor === 'rh' ? '👥 RH' :
-                               usuario.setor === 'financeiro' ? '💰 FINANCEIRO' :
-                               usuario.setor === 'comercial' ? '📊 COMERCIAL' : '👤 COLABORADOR';
-                }
-                
+                let roleText = usuario.tipo === 'gestor' ? '👩‍💻 GESTOR' : (usuario.tipo === 'tecnico' ? '🔧 TÉCNICO' : (usuario.setor === 'rh' ? '👥 RH' : (usuario.setor === 'financeiro' ? '💰 FINANCEIRO' : (usuario.setor === 'comercial' ? '📊 COMERCIAL' : '👤 COLABORADOR'))));
                 document.getElementById('userRole').textContent = roleText;
                 document.getElementById('userAvatar').textContent = usuario.nome.charAt(0);
-                
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('mainScreen').classList.add('active');
-                
                 carregarMenu();
                 atualizarTudo();
-            } else {
-                alert('Email ou senha inválidos!');
-            }
+            } else { alert('Email ou senha inválidos!'); }
         }
 
         function logout() {
@@ -2170,44 +1896,25 @@
             document.getElementById('loginScreen').style.display = 'flex';
         }
 
-        // ========== MENU ==========
         function carregarMenu() {
             const navMenu = document.getElementById('navMenu');
-            navMenu.innerHTML = '';
-
             if (usuarioAtual.tipo === 'gestor') {
-                // Gestor: acesso total
-                navMenu.innerHTML = `
-                    <button class="nav-btn active" onclick="mudarTela('dashboard', this)">📊 DASHBOARD</button>
-                    <button class="nav-btn" onclick="mudarTela('chamados', this)">📋 CHAMADOS</button>
-                    <button class="nav-btn" onclick="mudarTela('novoChamado', this)">📡 NOVO CHAMADO</button>
-                    <button class="nav-btn" onclick="mudarTela('meusChamados', this)">👤 MEUS CHAMADOS</button>
-                `;
-                mudarTela('dashboard', document.querySelector('.nav-btn'));
+                navMenu.innerHTML = `<button class="nav-btn active" data-tela="dashboard">📊 DASHBOARD</button><button class="nav-btn" data-tela="chamados">📋 CHAMADOS</button><button class="nav-btn" data-tela="novoChamado">📡 NOVO CHAMADO</button><button class="nav-btn" data-tela="meusChamados">👤 MEUS CHAMADOS</button>`;
             } else if (usuarioAtual.tipo === 'tecnico') {
-                // Técnico: pode ver todos os chamados e abrir/fechar
-                navMenu.innerHTML = `
-                    <button class="nav-btn active" onclick="mudarTela('chamados', this)">📋 CHAMADOS</button>
-                    <button class="nav-btn" onclick="mudarTela('novoChamado', this)">📡 NOVO CHAMADO</button>
-                    <button class="nav-btn" onclick="mudarTela('meusChamados', this)">👤 MEUS CHAMADOS</button>
-                `;
-                mudarTela('chamados', document.querySelector('.nav-btn'));
+                navMenu.innerHTML = `<button class="nav-btn active" data-tela="chamados">📋 CHAMADOS</button><button class="nav-btn" data-tela="novoChamado">📡 NOVO CHAMADO</button><button class="nav-btn" data-tela="meusChamados">👤 MEUS CHAMADOS</button>`;
             } else {
-                // Colaborador: só abre chamados
-                navMenu.innerHTML = `
-                    <button class="nav-btn active" onclick="mudarTela('novoChamado', this)">📡 NOVO CHAMADO</button>
-                    <button class="nav-btn" onclick="mudarTela('meusChamados', this)">👤 MEUS CHAMADOS</button>
-                `;
-                mudarTela('novoChamado', document.querySelector('.nav-btn'));
+                navMenu.innerHTML = `<button class="nav-btn active" data-tela="novoChamado">📡 NOVO CHAMADO</button><button class="nav-btn" data-tela="meusChamados">👤 MEUS CHAMADOS</button>`;
             }
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => mudarTela(btn.getAttribute('data-tela'), btn));
+            });
+            mudarTela(document.querySelector('.nav-btn.active').getAttribute('data-tela'), document.querySelector('.nav-btn.active'));
         }
 
         function mudarTela(tela, btn) {
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
+            if (btn) btn.classList.add('active');
             document.querySelectorAll('.dashboard-screen, .chamados-screen').forEach(s => s.classList.remove('active'));
-            
             if (tela === 'dashboard') {
                 document.getElementById('dashboardScreen').classList.add('active');
                 atualizarDashboard();
@@ -2217,211 +1924,76 @@
                 atualizarTabelaChamados();
             } else if (tela === 'novoChamado') {
                 document.getElementById('novoChamadoScreen').classList.add('active');
-                document.getElementById('setorChamado').value = 
-                    usuarioAtual.setor === 'ti' ? '🖥️ TI' :
-                    usuarioAtual.setor === 'rh' ? '👥 RH' :
-                    usuarioAtual.setor === 'financeiro' ? '💰 FINANCEIRO' : '📊 COMERCIAL';
+                let setorDisplay = usuarioAtual.setor === 'ti' ? '🖥️ TI' : (usuarioAtual.setor === 'rh' ? '👥 RH' : (usuarioAtual.setor === 'financeiro' ? '💰 FINANCEIRO' : '📊 COMERCIAL'));
+                document.getElementById('setorChamado').value = setorDisplay;
             } else if (tela === 'meusChamados') {
                 document.getElementById('meusChamadosScreen').classList.add('active');
                 atualizarMeusChamados();
             }
         }
 
-        // ========== CHAMADOS ==========
         function abrirChamado() {
             const titulo = document.getElementById('tituloChamado').value;
             const categoria = document.getElementById('categoriaChamado').value;
             const prioridade = document.getElementById('prioridadeChamado').value;
             const descricao = document.getElementById('descricaoChamado').value;
-
-            if (!titulo || !descricao) {
-                alert('Preencha título e descrição!');
-                return;
-            }
+            if (!titulo || !descricao) { alert('Preencha título e descrição!'); return; }
 
             const now = new Date();
             const dataHora = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
             const id = 'M' + now.getFullYear() + String(chamados.length + 1).padStart(4, '0');
-
-            // Atribuir técnico baseado na prioridade
-            let tecnico = tecnicosDisponiveis[0]; // João Silva
-            if (prioridade === 'alta') {
-                tecnico = tecnicosDisponiveis[1]; // Maria Santos
-            } else if (prioridade === 'media') {
-                tecnico = tecnicosDisponiveis[2]; // Pedro Costa
-            }
+            let tecnico = TECNICOS_DISPONIVEIS[0];
+            if (prioridade === 'alta') tecnico = TECNICOS_DISPONIVEIS[1];
+            else if (prioridade === 'media') tecnico = TECNICOS_DISPONIVEIS[2];
 
             const novoChamado = {
-                id: id,
-                data: dataHora,
-                titulo: titulo,
-                categoria: categoria,
-                prioridade: prioridade,
-                status: 'aberto',
-                setor: usuarioAtual.setor,
-                solicitante: usuarioAtual.nome,
-                email: usuarioAtual.email,
-                tecnico: tecnico,
-                motivo: '',
-                observacao: '',
-                historico: [
-                    { data: dataHora, acao: 'Chamado aberto', responsavel: usuarioAtual.nome },
-                    { data: dataHora, acao: `Atribuído a ${tecnico}`, responsavel: 'Sistema' }
-                ]
+                id, data: dataHora, titulo, categoria, prioridade, status: 'aberto', setor: usuarioAtual.setor,
+                solicitante: usuarioAtual.nome, email: usuarioAtual.email, descricao, tecnico, motivo: '', observacao: '',
+                historico: [{ data: dataHora, acao: 'Chamado aberto', responsavel: usuarioAtual.nome }, { data: dataHora, acao: `Atribuído a ${tecnico}`, responsavel: 'Sistema' }]
             };
-
             chamados.push(novoChamado);
             salvarChamados();
-
             document.getElementById('tituloChamado').value = '';
             document.getElementById('descricaoChamado').value = '';
-
             alert(`Chamado ${id} aberto! Técnico responsável: ${tecnico}`);
             
-            if (usuarioAtual.tipo === 'gestor') {
-                atualizarDashboard();
-                mudarTela('chamados', document.querySelectorAll('.nav-btn')[1]);
-            } else if (usuarioAtual.tipo === 'tecnico') {
-                atualizarTabelaChamados();
-                mudarTela('chamados', document.querySelector('.nav-btn'));
-            } else {
-                atualizarMeusChamados();
-                mudarTela('meusChamados', document.querySelectorAll('.nav-btn')[1]);
-            }
+            if (usuarioAtual.tipo === 'gestor') { atualizarDashboard(); mudarTela('chamados', document.querySelector('.nav-btn[data-tela="chamados"]')); }
+            else if (usuarioAtual.tipo === 'tecnico') { atualizarTabelaChamados(); mudarTela('chamados', document.querySelector('.nav-btn[data-tela="chamados"]')); }
+            else { atualizarMeusChamados(); mudarTela('meusChamados', document.querySelector('.nav-btn[data-tela="meusChamados"]')); }
         }
 
         function atualizarMeusChamados() {
             const meusChamados = chamados.filter(c => c.email === usuarioAtual.email);
             const tbody = document.getElementById('tabelaMeusChamados');
-            tbody.innerHTML = '';
-
-            if (meusChamados.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="empty-state">
-                            <span>📭</span>
-                            <p>Nenhum chamado encontrado</p>
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            meusChamados.forEach(c => {
-                tbody.innerHTML += criarLinhaChamadoSimples(c);
-            });
-        }
-
-        function criarLinhaChamadoSimples(chamado) {
-            const priorityClass = `priority-${chamado.prioridade}`;
-            const priorityText = chamado.prioridade === 'alta' ? '🔴 ALTA' : 
-                               chamado.prioridade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA';
-
-            return `
-                <tr>
-                    <td>${chamado.id}</td>
-                    <td>${chamado.data}</td>
-                    <td>${chamado.titulo}</td>
-                    <td><span class="badge ${priorityClass}">${priorityText}</span></td>
-                    <td>
-                        <div class="acoes-container">
-                            <button class="btn-acao btn-ver" onclick="verDetalhes('${chamado.id}')">VER</button>
-                            <div class="tecnico-info">
-                                <span class="tecnico-label">Técnico</span>
-                                <span class="tecnico-nome">${chamado.tecnico || 'Não atribuído'}</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            `;
+            if (meusChamados.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><span>📭</span><p>Nenhum chamado encontrado</p></td></tr>'; return; }
+            tbody.innerHTML = meusChamados.map(c => `
+                <tr><td>${c.id}</td><td>${c.data}</td><td>${c.titulo}</td><td><span class="badge priority-${c.prioridade}">${c.prioridade === 'alta' ? '🔴 ALTA' : (c.prioridade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA')}</span></td>
+                <td><div class="acoes-container"><button class="btn-acao btn-ver" onclick="verDetalhes('${c.id}')">VER</button><div class="tecnico-info"><span class="tecnico-label">Técnico</span><span class="tecnico-nome">${c.tecnico || 'Não atribuído'}</span></div></div></td></tr>
+            `).join('');
         }
 
         function atualizarTabelaChamados() {
             const tbody = document.getElementById('tabelaChamados');
-            tbody.innerHTML = '';
-
-            if (chamados.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="empty-state">
-                            <span>📭</span>
-                            <p>Nenhum chamado encontrado</p>
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            chamados.forEach(c => {
-                tbody.innerHTML += criarLinhaChamadoCompleto(c);
-            });
-        }
-
-        function criarLinhaChamadoCompleto(chamado) {
-            const priorityClass = `priority-${chamado.prioridade}`;
-            const priorityText = chamado.prioridade === 'alta' ? '🔴 ALTA' : 
-                               chamado.prioridade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA';
-
-            const statusDisplay = chamado.status === 'aberto' ? 'ABERTO' :
-                                 chamado.status === 'andamento' ? 'ANDAMENTO' :
-                                 chamado.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO';
-
-            return `
-                <tr>
-                    <td>${chamado.id}</td>
-                    <td>${chamado.data}</td>
-                    <td>${chamado.titulo}</td>
-                    <td>${chamado.setor.toUpperCase()}</td>
-                    <td>${chamado.solicitante}</td>
-                    <td><span class="badge ${priorityClass}">${priorityText}</span></td>
-                    <td>
-                        <div class="acoes-container">
-                            <button class="btn-acao btn-ver" onclick="verDetalhes('${chamado.id}')">VER</button>
-                            ${usuarioAtual.tipo !== 'usuario' ? 
-                                `<button class="btn-acao btn-fechar" onclick="abrirModalFechar('${chamado.id}')" ${chamado.status === 'fechado' ? 'disabled' : ''}>FECHAR</button>` : ''}
-                            
-                            <div class="status-dropdown" id="status-${chamado.id}">
-                                <button class="status-button ${chamado.status}" onclick="toggleStatusMenu('${chamado.id}')">
-                                    ${statusDisplay}
-                                </button>
-                                <div class="status-menu" id="menu-${chamado.id}">
-                                    <div class="status-option aberto-option" onclick="mudarStatus('${chamado.id}', 'aberto')">ABERTO</div>
-                                    <div class="status-option andamento-option" onclick="mudarStatus('${chamado.id}', 'andamento')">ANDAMENTO</div>
-                                    <div class="status-option resolvido-option" onclick="mudarStatus('${chamado.id}', 'resolvido')">RESOLVIDO</div>
-                                    <div class="status-option fechado-option" onclick="mudarStatus('${chamado.id}', 'fechado')">FECHADO</div>
-                                </div>
-                            </div>
-
-                            <div class="tecnico-info">
-                                <span class="tecnico-label">Técnico</span>
-                                <span class="tecnico-nome">${chamado.tecnico || 'Não atribuído'}</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            `;
+            if (chamados.length === 0) { tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><span>📭</span><p>Nenhum chamado encontrado</p></td></tr>'; return; }
+            tbody.innerHTML = chamados.map(c => {
+                const statusDisplay = { aberto: 'ABERTO', andamento: 'ANDAMENTO', resolvido: 'RESOLVIDO', fechado: 'FECHADO' }[c.status];
+                const priorityText = c.prioridade === 'alta' ? '🔴 ALTA' : (c.prioridade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA');
+                const podeFechar = usuarioAtual.tipo !== 'usuario' && c.status !== 'fechado';
+                return `<tr><td>${c.id}</td><td>${c.data}</td><td>${c.titulo}</td><td>${c.setor.toUpperCase()}</td><td>${c.solicitante}</td><td><span class="badge priority-${c.prioridade}">${priorityText}</span></td>
+                <td><div class="acoes-container"><button class="btn-acao btn-ver" onclick="verDetalhes('${c.id}')">VER</button>${podeFechar ? `<button class="btn-acao btn-fechar" onclick="abrirModalFechar('${c.id}')">FECHAR</button>` : ''}
+                <div class="status-dropdown"><button class="status-button ${c.status}" onclick="toggleStatusMenu('${c.id}')">${statusDisplay}</button><div class="status-menu" id="menu-${c.id}"><div class="status-option aberto-option" onclick="mudarStatus('${c.id}', 'aberto')">ABERTO</div><div class="status-option andamento-option" onclick="mudarStatus('${c.id}', 'andamento')">ANDAMENTO</div><div class="status-option resolvido-option" onclick="mudarStatus('${c.id}', 'resolvido')">RESOLVIDO</div><div class="status-option fechado-option" onclick="mudarStatus('${c.id}', 'fechado')">FECHADO</div></div></div>
+                <div class="tecnico-info"><span class="tecnico-label">Técnico</span><span class="tecnico-nome">${c.tecnico || 'Não atribuído'}</span></div></div></td></tr>`;
+            }).join('');
         }
 
         function toggleStatusMenu(id) {
-            // Fechar todos os menus
-            document.querySelectorAll('.status-menu').forEach(menu => {
-                menu.classList.remove('show');
-            });
-            
-            // Abrir o menu clicado
+            document.querySelectorAll('.status-menu').forEach(menu => menu.classList.remove('show'));
             const menu = document.getElementById(`menu-${id}`);
-            if (menu) {
-                menu.classList.toggle('show');
-            }
+            if (menu) menu.classList.toggle('show');
         }
 
-        // Fechar menu ao clicar fora
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.status-dropdown')) {
-                document.querySelectorAll('.status-menu').forEach(menu => {
-                    menu.classList.remove('show');
-                });
-            }
+            if (!event.target.closest('.status-dropdown')) document.querySelectorAll('.status-menu').forEach(menu => menu.classList.remove('show'));
         });
 
         function filtrarChamados() {
@@ -2429,51 +2001,30 @@
             const prioridade = document.getElementById('filtroPrioridade').value;
             const setor = document.getElementById('filtroSetor').value;
             const pesquisa = document.getElementById('pesquisaChamados').value.toLowerCase();
-
-            let filtrados = chamados.filter(c => {
-                let matchStatus = !status || c.status === status;
-                let matchPrioridade = !prioridade || c.prioridade === prioridade;
-                let matchSetor = !setor || c.setor === setor;
-                let matchPesquisa = !pesquisa || 
-                    c.titulo.toLowerCase().includes(pesquisa) ||
-                    c.solicitante.toLowerCase().includes(pesquisa) ||
-                    c.id.toLowerCase().includes(pesquisa);
-
-                return matchStatus && matchPrioridade && matchSetor && matchPesquisa;
-            });
-
+            const filtrados = chamados.filter(c => (!status || c.status === status) && (!prioridade || c.prioridade === prioridade) && (!setor || c.setor === setor) && (!pesquisa || c.titulo.toLowerCase().includes(pesquisa) || c.solicitante.toLowerCase().includes(pesquisa) || c.id.toLowerCase().includes(pesquisa)));
             const tbody = document.getElementById('tabelaChamados');
-            tbody.innerHTML = '';
-
-            filtrados.forEach(c => {
-                tbody.innerHTML += criarLinhaChamadoCompleto(c);
-            });
+            if (filtrados.length === 0) { tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><span>🔍</span><p>Nenhum chamado encontrado</p></td></tr>'; return; }
+            tbody.innerHTML = filtrados.map(c => {
+                const statusDisplay = { aberto: 'ABERTO', andamento: 'ANDAMENTO', resolvido: 'RESOLVIDO', fechado: 'FECHADO' }[c.status];
+                const priorityText = c.prioridade === 'alta' ? '🔴 ALTA' : (c.prioridade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA');
+                const podeFechar = usuarioAtual.tipo !== 'usuario' && c.status !== 'fechado';
+                return `<tr><td>${c.id}</td><td>${c.data}</td><td>${c.titulo}</td><td>${c.setor.toUpperCase()}</td><td>${c.solicitante}</td><td><span class="badge priority-${c.prioridade}">${priorityText}</span></td>
+                <td><div class="acoes-container"><button class="btn-acao btn-ver" onclick="verDetalhes('${c.id}')">VER</button>${podeFechar ? `<button class="btn-acao btn-fechar" onclick="abrirModalFechar('${c.id}')">FECHAR</button>` : ''}
+                <div class="status-dropdown"><button class="status-button ${c.status}" onclick="toggleStatusMenu('${c.id}')">${statusDisplay}</button><div class="status-menu" id="menu-${c.id}"><div class="status-option aberto-option" onclick="mudarStatus('${c.id}', 'aberto')">ABERTO</div><div class="status-option andamento-option" onclick="mudarStatus('${c.id}', 'andamento')">ANDAMENTO</div><div class="status-option resolvido-option" onclick="mudarStatus('${c.id}', 'resolvido')">RESOLVIDO</div><div class="status-option fechado-option" onclick="mudarStatus('${c.id}', 'fechado')">FECHADO</div></div></div>
+                <div class="tecnico-info"><span class="tecnico-label">Técnico</span><span class="tecnico-nome">${c.tecnico || 'Não atribuído'}</span></div></div></td></tr>`;
+            }).join('');
         }
 
         function mudarStatus(id, novoStatus) {
-            if (usuarioAtual.tipo === 'usuario') {
-                alert('Apenas técnicos e gestores podem alterar status');
-                return;
-            }
-
+            if (usuarioAtual.tipo === 'usuario') { alert('Apenas técnicos e gestores podem alterar status'); return; }
             const chamado = chamados.find(c => c.id === id);
             if (chamado) {
                 chamado.status = novoStatus;
-                chamado.historico.push({
-                    data: new Date().toLocaleString(),
-                    acao: `Status alterado para ${novoStatus}`,
-                    responsavel: usuarioAtual.nome
-                });
+                chamado.historico.push({ data: new Date().toLocaleString(), acao: `Status alterado para ${novoStatus}`, responsavel: usuarioAtual.nome });
                 salvarChamados();
-                
-                // Fechar o menu
-                document.getElementById(`menu-${id}`).classList.remove('show');
-                
+                document.getElementById(`menu-${id}`)?.classList.remove('show');
                 atualizarTabelaChamados();
-                if (usuarioAtual.tipo === 'gestor') {
-                    atualizarDashboard();
-                    atualizarGraficos();
-                }
+                if (usuarioAtual.tipo === 'gestor') { atualizarDashboard(); atualizarGraficos(); }
             }
         }
 
@@ -2485,134 +2036,26 @@
             document.getElementById('totalFechados').textContent = chamados.filter(c => c.status === 'fechado').length;
         }
 
-        // ========== GRÁFICOS ==========
         function atualizarGraficos() {
             const abertos = chamados.filter(c => c.status === 'aberto').length;
             const andamento = chamados.filter(c => c.status === 'andamento').length;
             const resolvidos = chamados.filter(c => c.status === 'resolvido').length;
             const fechados = chamados.filter(c => c.status === 'fechado').length;
-
             if (statusChart) statusChart.destroy();
             if (priorityChart) priorityChart.destroy();
-
             const ctx1 = document.getElementById('statusChart').getContext('2d');
-            statusChart = new Chart(ctx1, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Abertos', 'Andamento', 'Resolvidos', 'Fechados'],
-                    datasets: [{
-                        data: [abertos, andamento, resolvidos, fechados],
-                        backgroundColor: ['#FF3366', '#FFAA00', '#00FFC8', '#2A2A4A'],
-                        borderColor: '#0A0A1A',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: { color: '#E0E0FF', font: { family: 'Space Grotesk' } }
-                        }
-                    }
-                }
-            });
-
+            statusChart = new Chart(ctx1, { type: 'doughnut', data: { labels: ['Abertos', 'Andamento', 'Resolvidos', 'Fechados'], datasets: [{ data: [abertos, andamento, resolvidos, fechados], backgroundColor: ['#FF3366', '#FFAA00', '#00FFC8', '#2A2A4A'], borderColor: '#0A0A1A', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#E0E0FF', font: { family: 'Space Grotesk' } } } } } });
             const altas = chamados.filter(c => c.prioridade === 'alta').length;
             const medias = chamados.filter(c => c.prioridade === 'media').length;
             const baixas = chamados.filter(c => c.prioridade === 'baixa').length;
-
             const ctx2 = document.getElementById('priorityChart').getContext('2d');
-            priorityChart = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: ['Alta', 'Média', 'Baixa'],
-                    datasets: [{
-                        data: [altas, medias, baixas],
-                        backgroundColor: ['#FF3366', '#FFAA00', '#00FFC8'],
-                        borderColor: '#0A0A1A',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: '#2A2A4A' },
-                            ticks: { color: '#E0E0FF', font: { family: 'Space Grotesk' } }
-                        },
-                        x: {
-                            ticks: { color: '#E0E0FF', font: { family: 'Space Grotesk' } }
-                        }
-                    }
-                }
-            });
+            priorityChart = new Chart(ctx2, { type: 'bar', data: { labels: ['Alta', 'Média', 'Baixa'], datasets: [{ data: [altas, medias, baixas], backgroundColor: ['#FF3366', '#FFAA00', '#00FFC8'], borderColor: '#0A0A1A', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#2A2A4A' }, ticks: { color: '#E0E0FF', font: { family: 'Space Grotesk' } } }, x: { ticks: { color: '#E0E0FF', font: { family: 'Space Grotesk' } } } } } });
         }
 
-        // ========== AÇÕES ==========
         function verDetalhes(id) {
             const chamado = chamados.find(c => c.id === id);
             if (!chamado) return;
-
-            const html = `
-                <div>
-                    <h3 style="color: #0096FF; margin-bottom: 20px;">${chamado.titulo}</h3>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                        <div><strong>ID:</strong> ${chamado.id}</div>
-                        <div><strong>Data:</strong> ${chamado.data}</div>
-                        <div><strong>Setor:</strong> ${chamado.setor}</div>
-                        <div><strong>Solicitante:</strong> ${chamado.solicitante}</div>
-                        <div><strong>Prioridade:</strong> ${chamado.prioridade}</div>
-                        <div><strong>Status:</strong> ${chamado.status}</div>
-                        <div><strong>Técnico:</strong> ${chamado.tecnico || 'Não atribuído'}</div>
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <strong>📋 Descrição:</strong>
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 5px;">
-                            ${chamado.descricao}
-                        </div>
-                    </div>
-                    
-                    ${chamado.motivo ? `
-                        <div style="margin-bottom: 20px;">
-                            <strong>🔒 Motivo do Fechamento:</strong>
-                            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 5px;">
-                                ${chamado.motivo}
-                            </div>
-                        </div>
-                    ` : ''}
-                    
-                    ${chamado.observacao ? `
-                        <div style="margin-bottom: 20px;">
-                            <strong>📝 Observação:</strong>
-                            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 5px;">
-                                ${chamado.observacao}
-                            </div>
-                        </div>
-                    ` : ''}
-                    
-                    <div>
-                        <strong>📅 Histórico:</strong>
-                        <div class="timeline">
-                            ${chamado.historico.map(item => `
-                                <div class="timeline-item">
-                                    <div class="timeline-date">${item.data}</div>
-                                    <div class="timeline-action">${item.acao}</div>
-                                    <div style="color: #8A8AD9;">Por: ${item.responsavel}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-
+            const html = `<div><h3 style="color:#0096FF;margin-bottom:20px">${chamado.titulo}</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px"><div><strong>ID:</strong> ${chamado.id}</div><div><strong>Data:</strong> ${chamado.data}</div><div><strong>Setor:</strong> ${chamado.setor}</div><div><strong>Solicitante:</strong> ${chamado.solicitante}</div><div><strong>Prioridade:</strong> ${chamado.prioridade}</div><div><strong>Status:</strong> ${chamado.status}</div><div><strong>Técnico:</strong> ${chamado.tecnico || 'Não atribuído'}</div></div><div style="margin-bottom:20px"><strong>📋 Descrição:</strong><div style="background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-top:5px">${chamado.descricao || 'Sem descrição'}</div></div>${chamado.motivo ? `<div style="margin-bottom:20px"><strong>🔒 Motivo do Fechamento:</strong><div style="background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-top:5px">${chamado.motivo}</div></div>` : ''}${chamado.observacao ? `<div style="margin-bottom:20px"><strong>📝 Observação:</strong><div style="background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-top:5px">${chamado.observacao}</div></div>` : ''}<div><strong>📅 Histórico:</strong><div class="timeline">${chamado.historico.map(item => `<div class="timeline-item"><div class="timeline-date">${item.data}</div><div class="timeline-action">${item.acao}</div><div style="color:#8A8AD9">Por: ${item.responsavel}</div></div>`).join('')}</div></div></div>`;
             document.getElementById('detalhesChamado').innerHTML = html;
             document.getElementById('modalDetalhes').classList.add('active');
         }
@@ -2620,83 +2063,36 @@
         function abrirModalFechar(id) {
             const chamado = chamados.find(c => c.id === id);
             if (!chamado) return;
-
-            const html = `
-                <div class="form-group">
-                    <label>🔒 MOTIVO DO FECHAMENTO</label>
-                    <textarea id="motivoFechamento" rows="3" placeholder="Ex: Problema resolvido, Chamado duplicado, etc"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>📝 OBSERVAÇÃO</label>
-                    <textarea id="observacaoFechamento" rows="4" placeholder="Descreva detalhes da solução..."></textarea>
-                </div>
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn-login" onclick="confirmarFechamento('${id}')">CONFIRMAR FECHAMENTO</button>
-                    <button class="btn-login" style="background: #2A2A4A;" onclick="fecharModal('modalFechar')">CANCELAR</button>
-                </div>
-            `;
-
-            document.getElementById('formFechar').innerHTML = html;
+            document.getElementById('formFechar').innerHTML = `<div class="form-group"><label>🔒 MOTIVO DO FECHAMENTO</label><textarea id="motivoFechamento" rows="3" placeholder="Ex: Problema resolvido, Chamado duplicado, etc"></textarea></div><div class="form-group"><label>📝 OBSERVAÇÃO</label><textarea id="observacaoFechamento" rows="4" placeholder="Descreva detalhes da solução..."></textarea></div><div style="display:flex;gap:10px;margin-top:20px"><button class="btn-login" onclick="confirmarFechamento('${id}')">CONFIRMAR FECHAMENTO</button><button class="btn-login" style="background:#2A2A4A" onclick="fecharModal('modalFechar')">CANCELAR</button></div>`;
             document.getElementById('modalFechar').classList.add('active');
         }
 
         function confirmarFechamento(id) {
             const chamado = chamados.find(c => c.id === id);
-            const motivo = document.getElementById('motivoFechamento').value;
-            const observacao = document.getElementById('observacaoFechamento').value;
-
-            if (!motivo) {
-                alert('Preencha o motivo do fechamento!');
-                return;
-            }
-
+            const motivo = document.getElementById('motivoFechamento')?.value;
+            const observacao = document.getElementById('observacaoFechamento')?.value;
+            if (!motivo) { alert('Preencha o motivo do fechamento!'); return; }
             chamado.status = 'fechado';
             chamado.motivo = motivo;
             chamado.observacao = observacao;
-            chamado.historico.push({
-                data: new Date().toLocaleString(),
-                acao: `Chamado fechado por ${usuarioAtual.tipo} - Motivo: ${motivo}`,
-                responsavel: usuarioAtual.nome
-            });
-
+            chamado.historico.push({ data: new Date().toLocaleString(), acao: `Chamado fechado por ${usuarioAtual.tipo} - Motivo: ${motivo}`, responsavel: usuarioAtual.nome });
             salvarChamados();
             fecharModal('modalFechar');
-            
-            if (usuarioAtual.tipo === 'gestor') {
-                atualizarDashboard();
-                atualizarTabelaChamados();
-                atualizarGraficos();
-            } else if (usuarioAtual.tipo === 'tecnico') {
-                atualizarTabelaChamados();
-            }
-            
+            if (usuarioAtual.tipo === 'gestor') { atualizarDashboard(); atualizarTabelaChamados(); atualizarGraficos(); }
+            else if (usuarioAtual.tipo === 'tecnico') { atualizarTabelaChamados(); }
             alert('Chamado fechado com sucesso!');
         }
 
         function atualizarTudo() {
-            if (usuarioAtual.tipo === 'gestor') {
-                atualizarDashboard();
-                atualizarGraficos();
-            }
-            if (usuarioAtual.tipo === 'gestor' || usuarioAtual.tipo === 'tecnico') {
-                atualizarTabelaChamados();
-            } else {
-                atualizarMeusChamados();
-            }
+            if (usuarioAtual.tipo === 'gestor') { atualizarDashboard(); atualizarGraficos(); }
+            if (usuarioAtual.tipo === 'gestor' || usuarioAtual.tipo === 'tecnico') atualizarTabelaChamados();
+            else atualizarMeusChamados();
         }
 
-        function fecharModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
+        function fecharModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
 
-        // Inicializar
         carregarDados();
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-            }
-        }
+        window.onclick = function(event) { if (event.target.classList.contains('modal')) event.target.classList.remove('active'); }
     </script>
 </body>
 </html>
