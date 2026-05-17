@@ -13,7 +13,6 @@
         .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(135deg, #0A0C10 0%, #12161F 100%); }
         .bg-grid { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,150,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,150,255,0.05) 1px, transparent 1px); background-size: 50px 50px; }
         
-        /* IDENTIFICADOR DE TELA - LANDING PAGE */
         .screen-identifier {
             position: fixed;
             bottom: 15px;
@@ -160,6 +159,8 @@
         .btn-solution { background: #00AAFF; color: #fff; }
         .btn-close { background: #FF4444; color: #fff; }
         .btn-reopen { background: #FFAA00; color: #1a1a2e; }
+        .btn-delete-user { background: #FF4444; color: #fff; }
+        .btn-edit-user { background: #FFAA00; color: #1a1a2e; }
         .btn-action:hover { filter: brightness(1.1); transform: translateY(-1px); }
         
         .form-ticket { background: rgba(18,22,31,0.8); border: 1px solid #2A2D35; border-radius: 16px; padding: 25px; }
@@ -170,27 +171,8 @@
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; background: #1A1E28; border: 1px solid #3A3D45; border-radius: 10px; color: #fff; font-family: inherit; transition: 0.3s; }
         .form-group textarea { resize: vertical; min-height: 100px; }
         
-        select, .filters select, .form-group select {
-            background-color: #1A1E28 !important;
-            color: #fff !important;
-            font-weight: 500 !important;
-            cursor: pointer;
-        }
-        
-        select option {
-            padding: 12px;
-            font-weight: 500;
-        }
-        
-        option[value="critical"], option[value="critical"]:checked { background-color: #FF0055 !important; color: #fff !important; }
-        option[value="alta"], option[value="alta"]:checked { background-color: #FF6600 !important; color: #fff !important; }
-        option[value="media"], option[value="media"]:checked { background-color: #FFCC00 !important; color: #1a1a2e !important; }
-        option[value="baixa"], option[value="baixa"]:checked { background-color: #00AAFF !important; color: #fff !important; }
-        
-        select.priority-select-critical { background-color: #FF0055 !important; color: #fff !important; }
-        select.priority-select-high { background-color: #FF6600 !important; color: #fff !important; }
-        select.priority-select-medium { background-color: #FFCC00 !important; color: #1a1a2e !important; }
-        select.priority-select-low { background-color: #00AAFF !important; color: #fff !important; }
+        select, .filters select, .form-group select { background-color: #1A1E28 !important; color: #fff !important; font-weight: 500 !important; cursor: pointer; }
+        select option { padding: 12px; font-weight: 500; }
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 1000; }
         .modal.active { display: flex; }
@@ -208,18 +190,16 @@
             .header { padding: 15px 20px; }
             .hero { padding: 100px 20px 60px; }
             .features { padding: 50px 20px; }
+            .stats { grid-template-columns: repeat(2,1fr); }
+            .charts { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- IDENTIFICADOR DE TELA (aparece no canto inferior direito) -->
     <div id="screenIdentifier" class="screen-identifier">🏠 LANDING PAGE</div>
-
     <div class="bg"><div class="bg-grid"></div></div>
 
-    <!-- ============================================ -->
-    <!-- TELA 1: LANDING PAGE (Página de Apresentação) -->
-    <!-- ============================================ -->
+    <!-- LANDING PAGE -->
     <div id="landing" class="landing">
         <div class="header">
             <div class="logo">🖥️ IT SERVICE DESK</div>
@@ -250,9 +230,7 @@
         <div class="footer">© 2024 IT Service Desk - Sistema Profissional de Chamados</div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- TELA 2: SPLASH SCREEN (Tela de Carregamento) -->
-    <!-- ============================================ -->
+    <!-- SPLASH SCREEN -->
     <div id="splash" class="splash" style="display:none">
         <div class="splash-content">
             <div class="splash-logo">🖥️</div>
@@ -261,9 +239,7 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- TELA 3: LOGIN SCREEN (Tela de Login) -->
-    <!-- ============================================ -->
+    <!-- LOGIN SCREEN -->
     <div id="loginScreen" class="login-screen" style="display:none">
         <div class="login-card">
             <div class="login-header">
@@ -278,9 +254,7 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- TELA 4: REGISTER SCREEN (Tela de Cadastro) -->
-    <!-- ============================================ -->
+    <!-- REGISTER SCREEN -->
     <div id="registerScreen" class="register-screen" style="display:none">
         <div class="register-card">
             <div class="register-header"><div class="icon">🔧</div><h2>Criar Conta</h2></div>
@@ -288,8 +262,8 @@
             <div id="registerError" class="error-msg"></div><div id="registerSuccess" class="success-msg"></div>
             <div class="input-group"><label>Nome</label><input type="text" id="registerNome" placeholder="João Silva"></div>
             <div class="input-group"><label>E-mail</label><input type="email" id="registerEmail" placeholder="seu@empresa.com"></div>
-            <div class="input-group"><label>Departamento</label><select id="registerDepartamento" style="background:#1A1E28; color:#fff;"><option value="ti">🖥️ Tecnologia da Informação</option><option value="rh">👥 Recursos Humanos</option><option value="financeiro">💰 Financeiro</option><option value="comercial">📊 Comercial</option></select></div>
-            <div class="input-group"><label>Nível de Acesso</label><select id="registerNivel" style="background:#1A1E28; color:#fff;"><option value="usuario">👤 Usuário</option><option value="n1">🔧 Analista N1</option><option value="n2">⚡ Especialista N2</option><option value="gestor">👩‍💻 Gestor de TI</option></select></div>
+            <div class="input-group"><label>Departamento</label><select id="registerDepartamento"><option value="ti">🖥️ TI</option><option value="rh">👥 RH</option><option value="financeiro">💰 Financeiro</option><option value="comercial">📊 Comercial</option></select></div>
+            <div class="input-group"><label>Nível de Acesso</label><select id="registerNivel"><option value="usuario">👤 Usuário</option><option value="n1">🔧 Analista N1</option><option value="n2">⚡ Especialista N2</option><option value="gestor">👩‍💻 Gestor TI</option></select></div>
             <div class="input-group"><label>Senha TI</label><input type="password" id="senhaTI" placeholder="Senha do TI"></div>
             <div class="input-group"><label>Sua Senha</label><input type="password" id="registerSenha" placeholder="Crie sua senha"></div>
             <div class="input-group"><label>Confirmar Senha</label><input type="password" id="registerConfirmarSenha" placeholder="Confirme sua senha"></div>
@@ -298,9 +272,7 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- TELA 5: MAIN APP (Sistema Principal) -->
-    <!-- ============================================ -->
+    <!-- MAIN APP -->
     <div id="mainApp" class="main-app">
         <div class="topbar">
             <div class="brand"><span class="brand-icon">🖥️</span><h2>IT SERVICE DESK</h2></div>
@@ -310,12 +282,9 @@
             </div>
         </div>
         <div class="container">
-            <!-- Menu de Navegação Principal -->
             <div class="menu" id="menuNav"></div>
             
-            <!-- ============================================ -->
-            <!-- SUB-TELA 5.1: DASHBOARD (Painel do Gestor) -->
-            <!-- ============================================ -->
+            <!-- DASHBOARD -->
             <div id="dashboardScreen" class="dashboard">
                 <div class="stats">
                     <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-info"><h4>TOTAL</h4><div class="number" id="totalChamados">0</div></div></div>
@@ -335,13 +304,11 @@
                 </div>
             </div>
             
-            <!-- ============================================ -->
-            <!-- SUB-TELA 5.2: LISTA DE CHAMADOS -->
-            <!-- ============================================ -->
+            <!-- LISTA DE CHAMADOS -->
             <div id="ticketsScreen" class="tickets-screen">
                 <div class="filters">
-                    <select id="filtroStatus" style="background:#1A1E28; color:#fff;"><option value="">📌 Todos Status</option><option value="aberto">🔴 Aberto</option><option value="andamento">🟡 Andamento</option><option value="resolvido">🟢 Resolvido</option><option value="fechado">⚫ Fechado</option></select>
-                    <select id="filtroPrioridade" style="background:#1A1E28; color:#fff;" onchange="mudarCorSelectFiltro(this)"><option value="">🎯 Todas Prioridades</option><option value="critical" style="background:#FF0055; color:#fff;">🔴 Crítica</option><option value="alta" style="background:#FF6600; color:#fff;">🟠 Alta</option><option value="media" style="background:#FFCC00; color:#1a1a2e;">🟡 Média</option><option value="baixa" style="background:#00AAFF; color:#fff;">🟢 Baixa</option></select>
+                    <select id="filtroStatus"><option value="">📌 Todos Status</option><option value="aberto">🔴 Aberto</option><option value="andamento">🟡 Andamento</option><option value="resolvido">🟢 Resolvido</option><option value="fechado">⚫ Fechado</option></select>
+                    <select id="filtroPrioridade"><option value="">🎯 Todas Prioridades</option><option value="critical">🔴 Crítica</option><option value="alta">🟠 Alta</option><option value="media">🟡 Média</option><option value="baixa">🟢 Baixa</option></select>
                     <input type="text" id="pesquisaChamados" placeholder="🔍 Buscar por ID ou título..." onkeyup="filtrarChamados()">
                 </div>
                 <div class="table-wrapper">
@@ -354,27 +321,17 @@
                 </div>
             </div>
             
-            <!-- ============================================ -->
-            <!-- SUB-TELA 5.3: ABRIR NOVO CHAMADO -->
-            <!-- ============================================ -->
+            <!-- NOVO CHAMADO -->
             <div id="novoChamadoScreen" class="tickets-screen">
                 <div class="form-ticket">
                     <h2>📝 Abrir Novo Chamado</h2>
                     <div class="form-row">
                         <div class="form-group"><label>Título</label><input type="text" id="tituloChamado" placeholder="Ex: Sistema ERP indisponível"></div>
-                        <div class="form-group"><label>Categoria</label><select id="categoriaChamado" style="background:#1A1E28; color:#fff;"><option value="infra">🖥️ Infraestrutura</option><option value="software">💿 Software</option><option value="rede">🌐 Rede</option><option value="email">📧 E-mail</option></select></div>
+                        <div class="form-group"><label>Categoria</label><select id="categoriaChamado"><option value="infra">🖥️ Infraestrutura</option><option value="software">💿 Software</option><option value="rede">🌐 Rede</option><option value="email">📧 E-mail</option></select></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Prioridade</label>
-                            <select id="prioridadeChamado" style="background:#1A1E28; color:#fff;" onchange="mudarCorSelectPrioridade(this)">
-                                <option value="baixa" style="background-color: #00AAFF; color: #fff;">🟢 Baixa</option>
-                                <option value="media" style="background-color: #FFCC00; color: #1a1a2e;">🟡 Média</option>
-                                <option value="alta" style="background-color: #FF6600; color: #fff;">🟠 Alta</option>
-                                <option value="critical" style="background-color: #FF0055; color: #fff;">🔴 Crítica</option>
-                            </select>
-                        </div>
-                        <div class="form-group"><label>Impacto</label><select id="impactoChamado" style="background:#1A1E28; color:#fff;"><option value="baixo">📉 Baixo - 1 usuário</option><option value="medio">📊 Médio - Setor</option><option value="alto">📈 Alto - Múltiplos setores</option><option value="total">🚨 Total - Empresa</option></select></div>
+                        <div class="form-group"><label>Prioridade</label><select id="prioridadeChamado"><option value="baixa">🟢 Baixa</option><option value="media">🟡 Média</option><option value="alta">🟠 Alta</option><option value="critical">🔴 Crítica</option></select></div>
+                        <div class="form-group"><label>Impacto</label><select id="impactoChamado"><option value="baixo">📉 Baixo - 1 usuário</option><option value="medio">📊 Médio - Setor</option><option value="alto">📈 Alto - Múltiplos setores</option><option value="total">🚨 Total - Empresa</option></select></div>
                     </div>
                     <div class="form-group"><label>Serviço Afetado</label><input type="text" id="servicoAfetado" placeholder="Ex: VPN, Sistema ERP, E-mail"></div>
                     <div class="form-group"><label>Descrição do Problema</label><textarea id="descricaoChamado" placeholder="Descreva detalhadamente o problema..."></textarea></div>
@@ -383,9 +340,7 @@
                 </div>
             </div>
             
-            <!-- ============================================ -->
-            <!-- SUB-TELA 5.4: MEUS CHAMADOS -->
-            <!-- ============================================ -->
+            <!-- MEUS CHAMADOS -->
             <div id="meusChamadosScreen" class="tickets-screen">
                 <div class="form-ticket">
                     <h2>👤 Meus Chamados</h2>
@@ -400,9 +355,25 @@
                 </div>
             </div>
             
-            <!-- ============================================ -->
-            <!-- SUB-TELA 5.5: NOTIFICAÇÕES -->
-            <!-- ============================================ -->
+            <!-- GERENCIAR USUÁRIOS -->
+            <div id="gerenciarUsuariosScreen" class="tickets-screen">
+                <div class="form-ticket">
+                    <h2>👥 Gerenciar Usuários</h2>
+                    <div class="filters">
+                        <input type="text" id="pesquisaUsuarios" placeholder="🔍 Buscar por nome ou e-mail..." onkeyup="filtrarUsuarios()">
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Nome</th><th>E-mail</th><th>Departamento</th><th>Nível</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody id="tabelaUsuarios"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NOTIFICAÇÕES -->
             <div id="notificacoesScreen" class="tickets-screen">
                 <div class="form-ticket">
                     <h2>🔔 Notificações</h2>
@@ -412,13 +383,12 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- MODAIS (Janelas flutuantes) -->
-    <!-- ============================================ -->
+    <!-- MODAIS -->
     <div id="modalDetalhes" class="modal"><div class="modal-content"><div class="modal-header"><h3>Detalhes do Chamado</h3><button class="modal-close" onclick="fecharModal('modalDetalhes')">&times;</button></div><div class="modal-body" id="detalhesChamado"></div></div></div>
     <div id="modalAtendimento" class="modal"><div class="modal-content"><div class="modal-header"><h3>Iniciar Atendimento</h3><button class="modal-close" onclick="fecharModal('modalAtendimento')">&times;</button></div><div class="modal-body" id="formAtendimento"></div></div></div>
     <div id="modalEscalar" class="modal"><div class="modal-content"><div class="modal-header"><h3>Escalonar Chamado</h3><button class="modal-close" onclick="fecharModal('modalEscalar')">&times;</button></div><div class="modal-body" id="formEscalar"></div></div></div>
     <div id="modalSolucao" class="modal"><div class="modal-content"><div class="modal-header"><h3>Registrar Solução</h3><button class="modal-close" onclick="fecharModal('modalSolucao')">&times;</button></div><div class="modal-body" id="formSolucao"></div></div></div>
+    <div id="modalEditarUsuario" class="modal"><div class="modal-content"><div class="modal-header"><h3>✏️ Editar Usuário</h3><button class="modal-close" onclick="fecharModal('modalEditarUsuario')">&times;</button></div><div class="modal-body" id="formEditarUsuario"></div></div></div>
 
     <script>
         // ============================================
@@ -434,46 +404,6 @@
         function atualizarIdentificadorTela(nome) {
             const el = document.getElementById('screenIdentifier');
             if(el) el.textContent = nome;
-        }
-
-        // ============================================
-        // FUNÇÕES DE COR DOS SELECTS
-        // ============================================
-        function mudarCorSelectPrioridade(select) {
-            const value = select.value;
-            if (value === 'critical') {
-                select.style.backgroundColor = '#FF0055';
-                select.style.color = '#fff';
-            } else if (value === 'alta') {
-                select.style.backgroundColor = '#FF6600';
-                select.style.color = '#fff';
-            } else if (value === 'media') {
-                select.style.backgroundColor = '#FFCC00';
-                select.style.color = '#1a1a2e';
-            } else if (value === 'baixa') {
-                select.style.backgroundColor = '#00AAFF';
-                select.style.color = '#fff';
-            }
-        }
-
-        function mudarCorSelectFiltro(select) {
-            const value = select.value;
-            if (value === 'critical') {
-                select.style.backgroundColor = '#FF0055';
-                select.style.color = '#fff';
-            } else if (value === 'alta') {
-                select.style.backgroundColor = '#FF6600';
-                select.style.color = '#fff';
-            } else if (value === 'media') {
-                select.style.backgroundColor = '#FFCC00';
-                select.style.color = '#1a1a2e';
-            } else if (value === 'baixa') {
-                select.style.backgroundColor = '#00AAFF';
-                select.style.color = '#fff';
-            } else {
-                select.style.backgroundColor = '#1A1E28';
-                select.style.color = '#fff';
-            }
         }
 
         // ============================================
@@ -519,7 +449,7 @@
         }
 
         // ============================================
-        // FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS
+        // FUNÇÕES DE NAVEGAÇÃO
         // ============================================
         function scrollToSection(s) { 
             const el = document.getElementById(s);
@@ -527,7 +457,7 @@
         }
 
         function entrarNoSistema() {
-            atualizarIdentificadorTela('🔄 SPLASH SCREEN (Carregamento)');
+            atualizarIdentificadorTela('🔄 SPLASH SCREEN');
             const landing = document.getElementById('landing');
             const splash = document.getElementById('splash');
             const login = document.getElementById('loginScreen');
@@ -559,7 +489,7 @@
         }
 
         // ============================================
-        // CADASTRO DE USUÁRIO
+        // CADASTRO
         // ============================================
         function cadastrarUsuario() {
             const nome = document.getElementById('registerNome').value.trim();
@@ -621,9 +551,9 @@
             }
             usuarioAtual = usuario;
             document.getElementById('userName').textContent = usuario.nome;
-            const roles = { gestor:'👩‍💻 GESTOR TI', n2:'⚡ ESPECIALISTA N2', n1:'🔧 ANALISTA N1', usuario:'👤 USUÁRIO' };
+            const roles = { gestor:'GESTOR TI', n2:'ESPECIALISTA N2', n1:'ANALISTA N1', usuario:'USUÁRIO' };
             document.getElementById('userRole').textContent = roles[usuario.nivel] || 'Usuário';
-            document.getElementById('userAvatar').textContent = usuario.nome.charAt(0);
+            document.getElementById('userAvatar').textContent = usuario.nome.charAt(0).toUpperCase();
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('mainApp').classList.add('active');
             carregarMenu();
@@ -639,18 +569,18 @@
         }
 
         // ============================================
-        // MENU E NAVEGAÇÃO DO SISTEMA
+        // MENU
         // ============================================
         function carregarMenu() {
             const menu = document.getElementById('menuNav');
             if(!menu) return;
             
             if(usuarioAtual.nivel === 'gestor') {
-                menu.innerHTML = `<button class="menu-btn" data-tela="dashboard">📊 Dashboard</button><button class="menu-btn" data-tela="tickets">📋 Chamados</button><button class="menu-btn" data-tela="novoChamado">📝 Novo Chamado</button><button class="menu-btn" data-tela="meusChamados">👤 Meus Chamados</button><button class="menu-btn" data-tela="notificacoes">🔔 Notificações</button>`;
+                menu.innerHTML = `<button class="menu-btn" data-tela="dashboard">📊 Dashboard</button><button class="menu-btn" data-tela="tickets">📋 Chamados</button><button class="menu-btn" data-tela="novoChamado">📝 Novo Chamado</button><button class="menu-btn" data-tela="meusChamados">👤 Meus Chamados</button><button class="menu-btn" data-tela="gerenciarUsuarios">👥 Gerenciar Usuários</button><button class="menu-btn" data-tela="notificacoes">🔔 Notificações</button>`;
+            } else if(usuarioAtual.nivel === 'n2') {
+                menu.innerHTML = `<button class="menu-btn" data-tela="tickets">📋 Chamados</button><button class="menu-btn" data-tela="meusChamados">👤 Meus Chamados</button><button class="menu-btn" data-tela="gerenciarUsuarios">👥 Gerenciar Usuários</button><button class="menu-btn" data-tela="notificacoes">🔔 Notificações</button>`;
             } else if(usuarioAtual.nivel === 'n1') {
                 menu.innerHTML = `<button class="menu-btn" data-tela="tickets">📋 Chamados</button><button class="menu-btn" data-tela="novoChamado">📝 Novo Chamado</button><button class="menu-btn" data-tela="meusChamados">👤 Meus Chamados</button><button class="menu-btn" data-tela="notificacoes">🔔 Notificações</button>`;
-            } else if(usuarioAtual.nivel === 'n2') {
-                menu.innerHTML = `<button class="menu-btn" data-tela="tickets">📋 Chamados</button><button class="menu-btn" data-tela="meusChamados">👤 Meus Chamados</button><button class="menu-btn" data-tela="notificacoes">🔔 Notificações</button>`;
             } else {
                 menu.innerHTML = `<button class="menu-btn" data-tela="novoChamado">📝 Novo Chamado</button><button class="menu-btn" data-tela="meusChamados">👤 Meus Chamados</button><button class="menu-btn" data-tela="notificacoes">🔔 Notificações</button>`;
             }
@@ -673,7 +603,7 @@
                 atualizarDashboard(); 
                 atualizarGraficos(); 
                 calcularSLAs();
-                atualizarIdentificadorTela('📊 DASHBOARD (Gestor)');
+                atualizarIdentificadorTela('📊 DASHBOARD');
             } else if(tela === 'tickets') { 
                 const tickets = document.getElementById('ticketsScreen');
                 if(tickets) tickets.classList.add('active'); 
@@ -694,6 +624,11 @@
                 if(meus) meus.classList.add('active'); 
                 atualizarMeusChamados();
                 atualizarIdentificadorTela('👤 MEUS CHAMADOS');
+            } else if(tela === 'gerenciarUsuarios') { 
+                const gerenciar = document.getElementById('gerenciarUsuariosScreen');
+                if(gerenciar) gerenciar.classList.add('active'); 
+                atualizarTabelaUsuarios();
+                atualizarIdentificadorTela('👥 GERENCIAR USUÁRIOS');
             } else if(tela === 'notificacoes') { 
                 const notif = document.getElementById('notificacoesScreen');
                 if(notif) notif.classList.add('active'); 
@@ -703,7 +638,132 @@
         }
 
         // ============================================
-        // FUNÇÕES DE CHAMADOS
+        // GERENCIAR USUÁRIOS
+        // ============================================
+        function atualizarTabelaUsuarios() {
+            const pesquisa = document.getElementById('pesquisaUsuarios')?.value.toLowerCase() || '';
+            let lista = usuarios.filter(u => u.id !== usuarioAtual.id);
+            
+            if(pesquisa) {
+                lista = lista.filter(u => u.nome.toLowerCase().includes(pesquisa) || u.email.toLowerCase().includes(pesquisa));
+            }
+            
+            const tbody = document.getElementById('tabelaUsuarios');
+            if(!tbody) return;
+            
+            if(lista.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty"><span>👥</span><p>Nenhum usuário encontrado</p>NonNullList'; 
+                return;
+            }
+            
+            tbody.innerHTML = lista.map(u => {
+                const nivelNome = { gestor:'Gestor TI', n2:'Especialista N2', n1:'Analista N1', usuario:'Usuário' };
+                const deptoNome = { ti:'TI', rh:'RH', financeiro:'Financeiro', comercial:'Comercial' };
+                return `
+                    <tr>
+                        <td>${u.id}</td>
+                        <td>${u.nome}</td>
+                        <td>${u.email}</td>
+                        <td>${deptoNome[u.depto] || u.depto}</td>
+                        <td><span class="badge badge-${u.nivel === 'gestor' ? 'high' : u.nivel === 'n2' ? 'medium' : u.nivel === 'n1' ? 'low' : 'open'}">${nivelNome[u.nivel]}</span></td>
+                        <td class="actions">
+                            <button class="btn-action btn-edit-user" onclick="abrirModalEditarUsuario(${u.id})">✏️ Editar</button>
+                            <button class="btn-action btn-delete-user" onclick="deletarUsuario(${u.id})">🗑️ Deletar</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function filtrarUsuarios() {
+            atualizarTabelaUsuarios();
+        }
+        
+        function abrirModalEditarUsuario(id) {
+            const usuario = usuarios.find(u => u.id === id);
+            if(!usuario) return;
+            
+            const modalBody = document.getElementById('formEditarUsuario');
+            if(modalBody) {
+                modalBody.innerHTML = `
+                    <input type="hidden" id="editUserId" value="${usuario.id}">
+                    <div class="input-group"><label>Nome</label><input type="text" id="editNome" value="${usuario.nome}"></div>
+                    <div class="input-group"><label>E-mail</label><input type="email" id="editEmail" value="${usuario.email}"></div>
+                    <div class="input-group"><label>Departamento</label>
+                        <select id="editDepartamento">
+                            <option value="ti" ${usuario.depto === 'ti' ? 'selected' : ''}>TI</option>
+                            <option value="rh" ${usuario.depto === 'rh' ? 'selected' : ''}>RH</option>
+                            <option value="financeiro" ${usuario.depto === 'financeiro' ? 'selected' : ''}>Financeiro</option>
+                            <option value="comercial" ${usuario.depto === 'comercial' ? 'selected' : ''}>Comercial</option>
+                        </select>
+                    </div>
+                    <div class="input-group"><label>Nível de Acesso</label>
+                        <select id="editNivel">
+                            <option value="usuario" ${usuario.nivel === 'usuario' ? 'selected' : ''}>Usuário</option>
+                            <option value="n1" ${usuario.nivel === 'n1' ? 'selected' : ''}>Analista N1</option>
+                            <option value="n2" ${usuario.nivel === 'n2' ? 'selected' : ''}>Especialista N2</option>
+                            <option value="gestor" ${usuario.nivel === 'gestor' ? 'selected' : ''}>Gestor TI</option>
+                        </select>
+                    </div>
+                    <div class="input-group"><label>Nova Senha (deixe em branco para manter)</label><input type="password" id="editSenha" placeholder="Nova senha"></div>
+                    <div style="display:flex; gap:10px; margin-top:20px">
+                        <button class="btn-login" onclick="confirmarEditarUsuario()">Salvar Alterações</button>
+                        <button class="btn-back" onclick="fecharModal('modalEditarUsuario')">Cancelar</button>
+                    </div>
+                `;
+            }
+            document.getElementById('modalEditarUsuario').classList.add('active');
+        }
+        
+        function confirmarEditarUsuario() {
+            const id = parseInt(document.getElementById('editUserId').value);
+            const usuario = usuarios.find(u => u.id === id);
+            if(!usuario) return;
+            
+            const novoNome = document.getElementById('editNome').value.trim();
+            const novoEmail = document.getElementById('editEmail').value.trim();
+            const novoDepto = document.getElementById('editDepartamento').value;
+            const novoNivel = document.getElementById('editNivel').value;
+            const novaSenha = document.getElementById('editSenha').value;
+            
+            if(!novoNome || !novoEmail) {
+                alert('Nome e e-mail são obrigatórios');
+                return;
+            }
+            
+            if(novoEmail !== usuario.email && usuarios.some(u => u.email === novoEmail)) {
+                alert('E-mail já está em uso por outro usuário');
+                return;
+            }
+            
+            usuario.nome = novoNome;
+            usuario.email = novoEmail;
+            usuario.depto = novoDepto;
+            usuario.nivel = novoNivel;
+            if(novaSenha) {
+                usuario.senha = hashSenha(novaSenha);
+            }
+            
+            salvarUsuarios();
+            fecharModal('modalEditarUsuario');
+            atualizarTabelaUsuarios();
+            alert(`✅ Usuário ${usuario.nome} atualizado com sucesso!`);
+        }
+        
+        function deletarUsuario(id) {
+            const usuario = usuarios.find(u => u.id === id);
+            if(!usuario) return;
+            
+            if(confirm(`⚠️ Tem certeza que deseja deletar o usuário "${usuario.nome}"?\n\nEsta ação não pode ser desfeita!`)) {
+                usuarios = usuarios.filter(u => u.id !== id);
+                salvarUsuarios();
+                atualizarTabelaUsuarios();
+                alert(`✅ Usuário ${usuario.nome} deletado com sucesso!`);
+            }
+        }
+
+        // ============================================
+        // CHAMADOS
         // ============================================
         function abrirChamado() {
             if(usuarioAtual.nivel === 'n2') {
@@ -748,8 +808,7 @@
             document.getElementById('servicoAfetado').value = '';
             document.getElementById('anexosChamado').value = '';
             
-            const meusBtn = document.querySelector('.menu-btn[data-tela="meusChamados"]');
-            if(meusBtn) mudarTela('meusChamados', meusBtn);
+            mudarTela('meusChamados', document.querySelector('.menu-btn[data-tela="meusChamados"]'));
         }
 
         function atualizarMeusChamados() {
@@ -758,20 +817,25 @@
             if(!tbody) return;
             
             if(meus.length === 0) { 
-                tbody.innerHTML = '<tr><td colspan="6" class="empty"><span>📭</span><p>Você ainda não possui chamados</p><p style="font-size:0.8em; margin-top:10px;">Clique em "Novo Chamado" para abrir seu primeiro chamado</p></td></tr>'; 
+                tbody.innerHTML = '<tr><td colspan="6" class="empty"><span>📭</span><p>Você ainda não possui chamados</p><p style="font-size:0.8em; margin-top:10px;">Clique em "Novo Chamado" para abrir seu primeiro chamado</p>NonNullList'; 
                 return; 
             }
             
-            tbody.innerHTML = meus.map(c => `
-                <tr>
-                    <td>${c.id}</td>
-                    <td>${c.data}</td>
-                    <td>${c.titulo}</td>
-                    <td><span class="badge badge-${c.prioridade}">${c.prioridade === 'critical' ? 'CRÍTICA' : c.prioridade === 'alta' ? 'ALTA' : c.prioridade === 'media' ? 'MÉDIA' : 'BAIXA'}</span></td>
-                    <td><span class="badge badge-${c.status === 'aberto' ? 'open' : c.status === 'andamento' ? 'progress' : c.status === 'resolvido' ? 'resolved' : 'closed'}">${c.status === 'aberto' ? 'ABERTO' : c.status === 'andamento' ? 'ANDAMENTO' : c.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO'}</span></td>
-                    <td class="actions"><button class="btn-action btn-view" onclick="verDetalhes('${c.id}')">VER</button></td>
-                </tr>
-            `).join('');
+            tbody.innerHTML = meus.map(c => {
+                const prioridadeClass = c.prioridade === 'critical' ? 'critical' : c.prioridade === 'alta' ? 'high' : c.prioridade === 'media' ? 'medium' : 'low';
+                const statusClass = c.status === 'aberto' ? 'open' : c.status === 'andamento' ? 'progress' : c.status === 'resolvido' ? 'resolved' : 'closed';
+                const statusText = c.status === 'aberto' ? 'ABERTO' : c.status === 'andamento' ? 'ANDAMENTO' : c.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO';
+                return `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${c.data}</td>
+                        <td>${c.titulo}</td>
+                        <td><span class="badge badge-${prioridadeClass}">${c.prioridade.toUpperCase()}</span></td>
+                        <td><span class="badge badge-${statusClass}">${statusText}</span></td>
+                        <td class="actions"><button class="btn-action btn-view" onclick="verDetalhes('${c.id}')">VER</button></td>
+                    </tr>
+                `;
+            }).join('');
         }
 
         function atualizarTabelaChamados() {
@@ -782,7 +846,7 @@
             const tbody = document.getElementById('tabelaChamados');
             if(!tbody) return;
             if(lista.length === 0) { 
-                tbody.innerHTML = '<tr><td colspan="7" class="empty"><span>📭</span><p>Nenhum chamado encontrado</p></td></tr>'; 
+                tbody.innerHTML = '<td><td colspan="7" class="empty"><span>📭</span><p>Nenhum chamado encontrado</p></tr>'; 
                 return; 
             }
             
@@ -792,6 +856,9 @@
                 const podeSolucionar = (usuarioAtual.nivel === 'n2' && c.status === 'andamento');
                 const podeFechar = (usuarioAtual.nivel === 'n1' && c.status === 'resolvido');
                 const podeReabrir = (usuarioAtual.nivel === 'gestor' && c.status === 'fechado');
+                const prioridadeClass = c.prioridade === 'critical' ? 'critical' : c.prioridade === 'alta' ? 'high' : c.prioridade === 'media' ? 'medium' : 'low';
+                const statusClass = c.status === 'aberto' ? 'open' : c.status === 'andamento' ? 'progress' : c.status === 'resolvido' ? 'resolved' : 'closed';
+                const statusText = c.status === 'aberto' ? 'ABERTO' : c.status === 'andamento' ? 'ANDAMENTO' : c.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO';
                 
                 return `
                     <tr>
@@ -799,8 +866,8 @@
                         <td>${c.data}</td>
                         <td>${c.titulo}</td>
                         <td>${c.solicitante}</td>
-                        <td><span class="badge badge-${c.prioridade}">${c.prioridade === 'critical' ? 'CRÍTICA' : c.prioridade === 'alta' ? 'ALTA' : c.prioridade === 'media' ? 'MÉDIA' : 'BAIXA'}</span></td>
-                        <td><span class="badge badge-${c.status === 'aberto' ? 'open' : c.status === 'andamento' ? 'progress' : c.status === 'resolvido' ? 'resolved' : 'closed'}">${c.status === 'aberto' ? 'ABERTO' : c.status === 'andamento' ? 'ANDAMENTO' : c.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO'}</span></td>
+                        <td><span class="badge badge-${prioridadeClass}">${c.prioridade.toUpperCase()}</span></td>
+                        <td><span class="badge badge-${statusClass}">${statusText}</span></td>
                         <td class="actions">
                             <button class="btn-action btn-view" onclick="verDetalhes('${c.id}')">VER</button>
                             ${podeAtender ? `<button class="btn-action btn-take" onclick="abrirModalAtendimento('${c.id}')">ATENDER</button>` : ''}
@@ -815,7 +882,7 @@
         }
 
         // ============================================
-        // FUNÇÕES DE MODAIS (ATENDIMENTO, ESCALONAR, SOLUÇÃO)
+        // MODAIS
         // ============================================
         function abrirModalAtendimento(id) {
             const c = chamados.find(c => c.id === id);
@@ -854,7 +921,7 @@
             if(modalBody) {
                 modalBody.innerHTML = `
                     <p><strong>Chamado:</strong> ${c.titulo}</p>
-                    <div class="input-group"><label>Nível</label><select id="nivelEscalar" style="background:#1A1E28; color:#fff;"><option value="n2">N2 - Especialista</option></select></div>
+                    <div class="input-group"><label>Nível</label><select id="nivelEscalar"><option value="n2">N2 - Especialista</option></select></div>
                     <div class="input-group"><label>Motivo</label><textarea id="motivoEscalar" rows="3"></textarea></div>
                     <button class="btn-login" onclick="confirmarEscalar('${id}')">Escalonar</button>
                     <button class="btn-back" onclick="fecharModal('modalEscalar')">Cancelar</button>
@@ -956,7 +1023,7 @@
             const tbody = document.getElementById('tabelaChamados');
             if(!tbody) return;
             if(filtrados.length === 0) { 
-                tbody.innerHTML = '<tr><td colspan="7" class="empty"><span>🔍</span><p>Nenhum chamado encontrado</p>NonNullList'; 
+                tbody.innerHTML = '<td><td colspan="7" class="empty"><span>🔍</span><p>Nenhum chamado encontrado</p></tr>'; 
                 return; 
             }
             tbody.innerHTML = filtrados.map(c => {
@@ -964,14 +1031,18 @@
                 const podeEscalar = (usuarioAtual.nivel === 'n1' && c.atendente === usuarioAtual.nome && c.status === 'andamento');
                 const podeSolucionar = (usuarioAtual.nivel === 'n2' && c.status === 'andamento');
                 const podeFechar = (usuarioAtual.nivel === 'n1' && c.status === 'resolvido');
+                const prioridadeClass = c.prioridade === 'critical' ? 'critical' : c.prioridade === 'alta' ? 'high' : c.prioridade === 'media' ? 'medium' : 'low';
+                const statusClass = c.status === 'aberto' ? 'open' : c.status === 'andamento' ? 'progress' : c.status === 'resolvido' ? 'resolved' : 'closed';
+                const statusText = c.status === 'aberto' ? 'ABERTO' : c.status === 'andamento' ? 'ANDAMENTO' : c.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO';
+                
                 return `
                     <tr>
                         <td>${c.id}</td>
                         <td>${c.data}</td>
                         <td>${c.titulo}</td>
                         <td>${c.solicitante}</td>
-                        <td><span class="badge badge-${c.prioridade}">${c.prioridade === 'critical' ? 'CRÍTICA' : c.prioridade === 'alta' ? 'ALTA' : c.prioridade === 'media' ? 'MÉDIA' : 'BAIXA'}</span></td>
-                        <td><span class="badge badge-${c.status === 'aberto' ? 'open' : c.status === 'andamento' ? 'progress' : c.status === 'resolvido' ? 'resolved' : 'closed'}">${c.status === 'aberto' ? 'ABERTO' : c.status === 'andamento' ? 'ANDAMENTO' : c.status === 'resolvido' ? 'RESOLVIDO' : 'FECHADO'}</span></td>
+                        <td><span class="badge badge-${prioridadeClass}">${c.prioridade.toUpperCase()}</span></td>
+                        <td><span class="badge badge-${statusClass}">${statusText}</span></td>
                         <td class="actions">
                             <button class="btn-action btn-view" onclick="verDetalhes('${c.id}')">Ver</button>
                             ${podeAtender ? `<button class="btn-action btn-take" onclick="abrirModalAtendimento('${c.id}')">ATENDER</button>` : ''}
@@ -1038,7 +1109,7 @@
         }
 
         // ============================================
-        // DASHBOARD E GRÁFICOS
+        // DASHBOARD
         // ============================================
         function atualizarDashboard() {
             const totalEl = document.getElementById('totalChamados');
@@ -1125,6 +1196,8 @@
             }
             const meusScreen = document.getElementById('meusChamadosScreen');
             if(meusScreen && meusScreen.classList.contains('active')) atualizarMeusChamados();
+            const gerenciarScreen = document.getElementById('gerenciarUsuariosScreen');
+            if(gerenciarScreen && gerenciarScreen.classList.contains('active')) atualizarTabelaUsuarios();
         }
 
         function fecharModal(modalId) { 
@@ -1132,9 +1205,7 @@
             if(modal) modal.classList.remove('active'); 
         }
 
-        // ============================================
         // INICIALIZAÇÃO
-        // ============================================
         carregarDados();
         window.onclick = function(e) { 
             if(e.target.classList && e.target.classList.contains('modal')) e.target.classList.remove('active'); 
